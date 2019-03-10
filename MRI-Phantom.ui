@@ -32,8 +32,8 @@
   <widget class="QPushButton" name="b1">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>200</y>
+     <x>100</x>
+     <y>280</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -46,9 +46,9 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>70</y>
-     <width>160</width>
-     <height>130</height>
+     <y>30</y>
+     <width>241</width>
+     <height>181</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
@@ -62,16 +62,85 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>225</width>
-        <height>225</height>
+        <width>1080</width>
+        <height>1080</height>
        </size>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QComboBox" name="cb">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>260</y>
+     <width>211</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>NanumBarunGothic</family>
+    </font>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <property name="currentText">
+    <string/>
+   </property>
+   <property name="currentIndex">
+    <number>8</number>
+   </property>
+   <item>
+    <property name="text">
+     <string>Shepp-Logan phantom</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Piecewise-Smooth Shepp-Logan phantom</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Defrise phantom with vertical ellipses</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>'QRM' phantom (ellipses)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1 cone</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1 rectangular</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>composite</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>composite of 6 gaussians + 1 parabola</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string/>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>
@@ -105,6 +174,22 @@
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cb</sender>
+   <signal>activated(QString)</signal>
+   <receiver>l1</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>417</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>213</x>
+     <y>138</y>
     </hint>
    </hints>
   </connection>

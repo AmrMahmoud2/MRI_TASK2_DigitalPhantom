@@ -21,21 +21,33 @@ class MRI(QDialog):
         super(MRI,self).__init__()
         loadUi('MRI-Phantom.ui',self)
         self.setWindowTitle('MRI-Phantom')
-        self.b1.clicked.connect(self.on_click)
+        #self.b1.clicked.connect(self.on_click)
+        self.cb.activated[str].connect(self.temp_var)
 
     @pyqtSlot()
-    def on_click(self):
-        array=self.Phantom()
-        img=self.convertArrayToImage(array)
+    #browse Btn
+    # def on_click(self):
+    #     array=self.Phantom()
+    #     img=self.convertArrayToImage(array)
+    #     self.ShowImage(img)
+    #     self.setTime(img)
+
+    def temp_var(self, text):
+        cur_txt = text
+        if cur_txt == 'Shepp-Logan phantom':
+            self.Display(1)
+        else:
+            self.l1.hide()
+
+    def Display(self,model_no):
+        array = self.Phantom(model_no)
+        img = self.convertArrayToImage(array)
         self.ShowImage(img)
         self.setTime(img)
 
 
-
-
-
-    def Phantom(self):
-     model =2
+    def Phantom(self,model):
+     model =model
      sizeN = 256
      #This will generate 256x256 phantom from the model
      self.phantom = TomoP2D.Model(model, sizeN,'/home/sohila/Documents/BIO-MATERIALS/Third-Year/Second-Term/MRI/Task2-MRI/phantoms/TomoPhantom/PhantomLibrary/models/Phantom2DLibrary.dat')
@@ -83,6 +95,19 @@ class MRI(QDialog):
                         Array_3d[x][y][1]=int(1090-(Array_3d[x][y][0]*((1090-787)/Max_value)))
         return Array_3d
 
+    def Set_T2(self,Array_3d,Max_value,Min_Value):
+        for x in range(len(Array_3d)):
+            for y in range(len(Array_3d)):
+                if (Array_3d[x][y][0] ==Max_value) :
+                    Array_3d[x][y][2]=113
+                else:
+                    if (Array_3d[x][y][0]==Min_Value):
+                        Array_3d[x][y][2]=121
+                    else:
+                        Array_3d[x][y][1]=int(121-(Array_3d[x][y][0]*((121-113)/Max_value)))
+        return Array_3d
+
+
     def setTime(self,image):
         Pixels_Array = np.asarray(image)
         Unique_Pixels_values= np.unique(Pixels_Array)
@@ -90,6 +115,8 @@ class MRI(QDialog):
         Min_Value=np.min(Unique_Pixels_values)
         Array_3d_With_intensity=self.Construct3DArray(Pixels_Array,0)
         Array_3d_With_T1=self.Set_T1(Array_3d_With_intensity,Max_value,Min_Value)
+        Array_3d_With_T2 = self.Set_T2(Array_3d_With_T1, Max_value, Min_Value)
+        print(Array_3d_With_T2)
 
 
 
