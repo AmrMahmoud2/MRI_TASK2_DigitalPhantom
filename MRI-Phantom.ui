@@ -6,192 +6,238 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>1080</width>
+    <height>1080</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>128</width>
+    <height>128</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>2000</width>
+    <height>2000</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>440</y>
-     <width>621</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="b1">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>280</y>
-     <width>89</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Browse</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>30</y>
-     <width>241</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="l1">
-      <property name="minimumSize">
-       <size>
-        <width>128</width>
-        <height>128</height>
-       </size>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QWidget" name="gridWidget" native="true">
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
       </property>
-      <property name="maximumSize">
-       <size>
-        <width>1080</width>
-        <height>1080</height>
-       </size>
+      <property name="spacing">
+       <number>3</number>
       </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QComboBox" name="cb">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>260</y>
-     <width>211</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>NanumBarunGothic</family>
-    </font>
-   </property>
-   <property name="editable">
-    <bool>false</bool>
-   </property>
-   <property name="currentText">
-    <string/>
-   </property>
-   <property name="currentIndex">
-    <number>8</number>
-   </property>
-   <item>
-    <property name="text">
-     <string>Shepp-Logan phantom</string>
-    </property>
+      <item row="2" column="2">
+       <widget class="QLabel" name="l3">
+        <property name="maximumSize">
+         <size>
+          <width>512</width>
+          <height>512</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLineEdit" name="text_4">
+        <property name="font">
+         <font>
+          <family>URW Gothic L</family>
+          <pointsize>18</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <stylestrategy>PreferDefault</stylestrategy>
+         </font>
+        </property>
+        <property name="text">
+         <string>        T1 Image</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="text_3">
+        <property name="font">
+         <font>
+          <family>URW Gothic L</family>
+          <pointsize>18</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <stylestrategy>PreferDefault</stylestrategy>
+         </font>
+        </property>
+        <property name="text">
+         <string>        T2 Image</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="text_1">
+        <property name="font">
+         <font>
+          <family>URW Gothic L</family>
+          <pointsize>18</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <stylestrategy>PreferDefault</stylestrategy>
+         </font>
+        </property>
+        <property name="text">
+         <string>          Phantom</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="l1">
+        <property name="minimumSize">
+         <size>
+          <width>128</width>
+          <height>128</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>512</width>
+          <height>512</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="l2">
+        <property name="minimumSize">
+         <size>
+          <width>128</width>
+          <height>128</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>512</width>
+          <height>512</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QComboBox" name="cb">
+        <property name="font">
+         <font>
+          <family>NanumBarunGothic</family>
+         </font>
+        </property>
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentText">
+         <string>Select Phantom</string>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>Select Phantom</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Shepp-Logan phantom</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Piecewise-Smooth Shepp-Logan phantom</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Defrise phantom with vertical ellipses</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>'QRM' phantom (ellipses)</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1 cone</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1 rectangular</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>composite</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>composite of 6 gaussians + 1 parabola</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
-    <property name="text">
-     <string>Piecewise-Smooth Shepp-Logan phantom</string>
-    </property>
+    <widget class="QLabel" name="l3_2">
+     <property name="maximumSize">
+      <size>
+       <width>512</width>
+       <height>512</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </item>
-   <item>
-    <property name="text">
-     <string>Defrise phantom with vertical ellipses</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>'QRM' phantom (ellipses)</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>1 cone</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>1 rectangular</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>composite</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>composite of 6 gaussians + 1 parabola</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string/>
-    </property>
-   </item>
-  </widget>
+  </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cb</sender>
-   <signal>activated(QString)</signal>
-   <receiver>l1</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>417</x>
-     <y>265</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>213</x>
-     <y>138</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
