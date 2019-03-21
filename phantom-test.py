@@ -284,13 +284,23 @@ class DynamicPlotter():
 
         # PyQtGraph stuff
         self.app = QtGui.QApplication([])
-        self.plt = pg.plot(title='Dynamic Plotting with PyQtGraph')
-        self.plt.resize(*size)
+        self.window=pg.GraphicsWindow(title="Basic plotting examples")
+        self.window.resizeEvent(size)
+        self.plt = self.window.addPlot(title="Basic array plotting")
         self.plt.showGrid(x=True, y=True)
         self.plt.setLabel('left', 'amplitude', 'V')
         self.plt.setLabel('bottom', 'time', 's')
         self.curve = self.plt.plot(self.x, self.y, pen=(255,0,0))
         self.curve = self.plt.plot(self.x, self.y, pen=(255, 0, 0))
+        ##plt2
+        self.plt2 = self.window.addPlot(title="Multiple curves")
+        self.plt2.showGrid(x=True, y=True)
+        self.plt2.setLabel('left', 'amplitude', 'V')
+        self.plt2.setLabel('bottom', 'time', 's')
+        self.curve2 = self.plt2.plot(self.x, self.y, pen=(255, 0, 0))
+        self.curve2 = self.plt2.plot(self.x, self.y, pen=(255, 0, 0))
+
+
 
         # QTimer
         self.timer = QtCore.QTimer()
@@ -307,6 +317,7 @@ class DynamicPlotter():
         self.databuffer.append( self.getdata() )
         self.y[:] = self.databuffer
         self.curve.setData(self.x, self.y)
+        self.curve2.setData(self.x, self.y)
         self.app.processEvents()
 
 
