@@ -5,22 +5,23 @@ from copy import deepcopy
 from PIL.ImageQt import ImageQt
 from PyQt5.QtWidgets import QInputDialog, QFileDialog, QMessageBox, QSizePolicy,QVBoxLayout, QSizePolicy
 from PIL import Image
-import numpy as np
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QApplication,QDialog
 from PyQt5.uic import loadUi
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from qimage2ndarray import gray2qimage
-import time
 import sys
 import numpy as np
-import pyqtgraph as pg
 from tomophantom import TomoP2D
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
+import pyqtgraph as pg
+import collections
 import random
+import time
+import math
 
 bg_color = 'black'
 fg_color = 'white'
@@ -35,8 +36,10 @@ class MRI(QDialog):
         #self.b1.clicked.connect(self.on_click)
         self.cb.activated[str].connect(self.temp_var)
         #self.graphicsView = pg.PlotWidget()
-        self.m = PlotCanvas(self, width=15, height=6)
-        self.m.move(168, 410)
+        #self.m = PlotCanvas(self, width=15, height=6)
+        #self.m.move(168, 410)
+        self.m=DynamicPlotter(sampleinterval=0.05, timewindow=20.)
+
         self.current_width=self.l1.width()
         #self.setAcceptHoverEvents(True)
 
@@ -201,7 +204,7 @@ class MRI(QDialog):
         print("t2",self.array_t2[self.y][self.x])
         print(self.x,self.y)
         # plotting
-        self.m.plot(self.array_t1[self.y][self.x], self.array_t2[self.y][self.x])
+        #self.m.plot(self.array_t1[self.y][self.x], self.array_t2[self.y][self.x])
         print(self.l1.width())
     #
     # def hoverEnterEvent(self, event):
@@ -269,7 +272,42 @@ class PlotCanvas(FigureCanvas):
          self.draw()
 
 
+class DynamicPlotter():
 
+    def __init__(self, sampleinterval=1, timewindow=100., size=(600,350)):
+        # Data stuff
+        self._interval = int(sampleinterval*1000)
+        self._bufsize = int(timewindow/sampleinterval)
+        self.databuffer = collections.deque([0.0]*self._bufsize, self._bufsize)
+        self.x = np.linspace(timewindow, 0.0, self._bufsize)
+        self.y = np.zeros(self._bufsize, dtype=np.float)
+
+        # PyQtGraph stuff
+        self.app = QtGui.QApplication([])
+        self.plt = pg.plot(title='Dynamic Plotting with PyQtGraph')
+        self.plt.resize(*size)
+        self.plt.showGrid(x=True, y=True)
+        self.plt.setLabel('left', 'amplitude', 'V')
+        self.plt.setLabel('bottom', 'time', 's')
+        self.curve = self.plt.plot(self.x, self.y, pen=(255,0,0))
+        self.curve = self.plt.plot(self.x, self.y, pen=(255, 0, 0))
+
+        # QTimer
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.updateplot)
+        self.timer.start(self._interval)
+
+    def getdata(self):
+        frequency = 0.5
+        noise = random.normalvariate(0., 1.)
+        new = 10.*math.tan(time.time()*frequency*2*math.pi) + noise
+        return new
+
+    def updateplot(self):
+        self.databuffer.append( self.getdata() )
+        self.y[:] = self.databuffer
+        self.curve.setData(self.x, self.y)
+        self.app.processEvents()
 
 
 
