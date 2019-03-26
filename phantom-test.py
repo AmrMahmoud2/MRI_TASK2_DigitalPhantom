@@ -3,7 +3,7 @@ import sys
 from copy import deepcopy
 
 from PIL.ImageQt import ImageQt
-from PyQt5.QtWidgets import QInputDialog, QFileDialog, QMessageBox, QSizePolicy, QVBoxLayout, QSizePolicy,QDockWidget,QMainWindow
+from PyQt5.QtWidgets import QInputDialog, QFileDialog, QMessageBox, QSizePolicy, QVBoxLayout, QSizePolicy,QDockWidget,QMainWindow,QScroller
 from PIL import Image
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QApplication,QDialog
@@ -32,7 +32,7 @@ fg_color = 'white'
 class MRI(QMainWindow ):
     def __init__(self):
         super(MRI,self).__init__()
-        loadUi('MRI-Phantom2.ui',self)
+        loadUi('MRI-Phantom22.ui',self)
         self.setWindowTitle('MRI-Phantom')
         #self.b1.clicked.connect(self.on_click)
         self.cb.activated[str].connect(self.temp_var)
@@ -63,8 +63,9 @@ class MRI(QMainWindow ):
 
     def temp_var(self):
         cur_txt = self.cb.currentText()
-        if cur_txt == "Shepp-Logan phantom":
-            self.Display(14,self.l1.width())
+        num, ok = QInputDialog.getInt(self, "integer input dialog", "enter a number")
+        if cur_txt == "Shepp-Logan phantom" and num!=0 and ok :
+            self.Display(14,num)
         else:
             self.l1.hide()
 
@@ -80,10 +81,13 @@ class MRI(QMainWindow ):
     def Display(self,model_no,size):
         array = self.Phantom(model_no, size)
         self.img = self.convertArrayToImage(array)
+        self.img.save('img.png')
         pixmap = self.ShowImage(self.img)
         self.l1.setPixmap(pixmap)
         # Mouse Event
         self.l1.mousePressEvent = self.getPixel
+        self.l1.mouseMoveEvent=self.mouseMoveEvent
+        #self.l1.mousePressEvent=self.wheelEvent
         array_with_time = self.setTime(self.img)
         # construct t1 image
         self.array_t1 = self.Return(array_with_time, 1)
@@ -92,10 +96,10 @@ class MRI(QMainWindow ):
         self.l2.setPixmap(pixmap_t1)
         # construct t2 image
         self.array_t2 = self.Return(array_with_time, 2)
-        img_t2 = self.convertArrayToImage(self.array_t2)
-        pixmap_t2 = self.ShowImage(img_t2)
-        self.l3.setPixmap(pixmap_t2)
-        print(self.l1.width())
+        # img_t2 = self.convertArrayToImage(self.array_t2)
+        # pixmap_t2 = self.ShowImage(img_t2)
+        # self.l3.setPixmap(pixmap_t2)
+        # print(self.l1.width())
         # I = np.dstack([img, img, img])
         # x = 73
         # y = 75
@@ -103,11 +107,16 @@ class MRI(QMainWindow ):
         # highlight_img= Image.fromarray(I).convert('RGB')
         # pixmap_test=self.ShowImage(highlight_img)
         # self.l2.setPixmap(pixmap_test)
+        K_array=self.K_Space()
+        img_K = self.convertArrayToImage(K_array)
+        pixmap_t2 = self.ShowImage(img_K)
+        self.l3.setPixmap(pixmap_t2)
+
 
 
     def Phantom(self,model,size):
      model =model
-     sizeN = 256
+     sizeN = size
      #This will generate 256x256 phantom from the model
      self.phantom = TomoP2D.Model(model, sizeN,'/home/sohila/Documents/BIO-MATERIALS/Third-Year/Second-Term/MRI/Task2-MRI/phantoms/TomoPhantom/PhantomLibrary/models/Phantom2DLibrary.dat')
      angles_num = int(0.5*np.pi*sizeN) # angles number
@@ -116,6 +125,14 @@ class MRI(QMainWindow ):
      P = int(np.sqrt(2)*sizeN) #detectors
      #This will generate a sinogram of the model
      sino_an = TomoP2D.ModelSino(model, sizeN, P, angles, '/home/sohila/Documents/BIO-MATERIALS/Third-Year/Second-Term/MRI/Task2-MRI/phantoms/TomoPhantom/PhantomLibrary/models/Phantom2DLibrary.dat')
+     # pp = {'Obj': TomoP2D.Objects2D.RECTANGLE,
+     #       'C0': 9.00,
+     #       'x0': 0.3,
+     #       'y0': -0.25,
+     #       'a': 0.5,
+     #       'b': 0.8,
+     #       'phi': 90.0}
+     # G=TomoP2D.Object(256, pp)
      return self.phantom
 
     def convertArrayToImage(self, arr):
@@ -212,6 +229,13 @@ class MRI(QMainWindow ):
           self.tabWidget.setCurrentIndex(1)
         print(self.l1.width())
 
+    def mouseMoveEvent(self, e):
+
+        x = e.x()
+        y = e.y()
+
+        text = "x: {0},  y: {1}".format(x, y)
+        print(text)
 
     def plotting(self,T1,T2):
         # define the data
@@ -255,6 +279,39 @@ class MRI(QMainWindow ):
         self.graphicsView.showGrid(x=True, y=True)
         self.graphicsView.setCentralItem(self.plt)
         self.graphicsView_2.setCentralItem(self.plt2)
+
+
+
+
+    def K_Space(self):
+
+
+        tr = 5000
+        te = 1500
+        k_space = np.zeros((30, 30), dtype=np.complex)
+
+        signal = np.ones(30)
+
+        for kspacerow in range(30):
+
+            signal = signal * np.exp(-te / self.array_t2)
+
+            for kspacecol in range(30):
+                GX = 2 * np.pi * kspacerow / 30
+                GY = 2 * np.pi * kspacecol / 30
+
+                for i in range(30):
+                    for j in range(30):
+                        total_theta = (GX * i + GY * j)
+                        k_space[kspacerow, kspacecol] += signal[i, j] * np.exp(-1j * total_theta)
+
+            signal = 1 - np.exp(-tr / self.array_t1)
+
+        test1 = np.absolute(np.fft.ifft2(k_space))
+        return test1
+
+
+
 
 
 
