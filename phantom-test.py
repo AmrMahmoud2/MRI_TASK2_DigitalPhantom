@@ -63,9 +63,9 @@ class MRI(QMainWindow ):
 
     def temp_var(self):
         cur_txt = self.cb.currentText()
-        num, ok = QInputDialog.getInt(self, "integer input dialog", "enter a number")
-        if cur_txt == "Shepp-Logan phantom" and num!=0 and ok :
-            self.Display(14,num)
+        self.num, ok = QInputDialog.getInt(self, "integer input dialog", "enter a number")
+        if cur_txt == "Shepp-Logan phantom" and self.num!=0 and ok :
+            self.Display(13,self.num)
         else:
             self.l1.hide()
 
@@ -91,14 +91,14 @@ class MRI(QMainWindow ):
         array_with_time = self.setTime(self.img)
         # construct t1 image
         self.array_t1 = self.Return(array_with_time, 1)
-        img_t1 = self.convertArrayToImage(self.array_t1)
-        pixmap_t1 = self.ShowImage(img_t1)
-        self.l2.setPixmap(pixmap_t1)
+        # img_t1 = self.convertArrayToImage(self.array_t1)
+        # pixmap_t1 = self.ShowImage(img_t1)
+        # self.l2.setPixmap(pixmap_t1)
         # construct t2 image
         self.array_t2 = self.Return(array_with_time, 2)
-        # img_t2 = self.convertArrayToImage(self.array_t2)
-        # pixmap_t2 = self.ShowImage(img_t2)
-        # self.l3.setPixmap(pixmap_t2)
+        img_t2 = self.convertArrayToImage(self.array_t2)
+        pixmap_t2 = self.ShowImage(img_t2)
+        self.l2.setPixmap(pixmap_t2)
         # print(self.l1.width())
         # I = np.dstack([img, img, img])
         # x = 73
@@ -169,12 +169,12 @@ class MRI(QMainWindow ):
         for x in range(len(Array_3d)):
             for y in range(len(Array_3d)):
                 if (Array_3d[x][y][0] ==Max_value) :
-                    Array_3d[x][y][1]=1090
+                    Array_3d[x][y][1]=4250
                 else:
                     if (Array_3d[x][y][0]==Min_Value):
-                        Array_3d[x][y][1]=0
+                        Array_3d[x][y][1]=250
                     else:
-                        Array_3d[x][y][1]=int(0+(Array_3d[x][y][0]*1090)/Max_value)
+                        Array_3d[x][y][1]=int(250+((Array_3d[x][y][0]*4000)/Max_value))
         return Array_3d
 
     def setTime(self,image):
@@ -193,12 +193,12 @@ class MRI(QMainWindow ):
         for x in range(len(Array_3d)):
             for y in range(len(Array_3d)):
                 if (Array_3d[x][y][0] ==Max_value) :
-                    Array_3d[x][y][2]=0
+                    Array_3d[x][y][2]=2000
                 else:
                     if (Array_3d[x][y][0]==Min_Value):
-                        Array_3d[x][y][2]=1090
+                        Array_3d[x][y][2]=5
                     else:
-                        Array_3d[x][y][2]=int(1090-((Array_3d[x][y][0]*1090)/Max_value))
+                        Array_3d[x][y][2]=int(5+((Array_3d[x][y][0]*2000)/Max_value))
         return Array_3d
 
     def Return(self,original_array, index):
@@ -213,12 +213,12 @@ class MRI(QMainWindow ):
         self.x = event.pos().x()
         self.y = event.pos().y()
         print('before',self.x, self.y)
-        self.ratio = 256 / self.l1.width()
-        if(self.x>256):
+        self.ratio = self.num / self.l1.width()
+        if(self.x>self.num):
 
             self.x=int(self.ratio*self.x)
 
-        if (self.y > 256):
+        if (self.y > self.num):
             self.y = int(self.ratio * self.y)
 
         print("t1",self.array_t1[self.y][self.x])
@@ -286,8 +286,9 @@ class MRI(QMainWindow ):
     def K_Space(self):
 
 
-        tr = 5000
-        te = 1500
+        tr = 5*np.average(self.array_t1)
+        print(tr)
+        te = 150
         k_space = np.zeros((30, 30), dtype=np.complex)
 
         signal = np.ones(30)
