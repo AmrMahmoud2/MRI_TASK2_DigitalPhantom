@@ -180,6 +180,33 @@ class Ui_MainWindow(object):
 
 
 from pyqtgraph import PlotWidget
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+
+# class Label(QtWidgets.QLabel):
+#     def __init__(self, parent):
+#         super(Label, self).__init__(parent=parent)
+#
+#     def paintEvent(self, event):
+#         super().paintEvent(event)
+#         qp = QtGui.QPainter(self)
+#         print("hello")
+#         col = QColor(0, 0, 0)
+#         col.setNamedColor('#d4d4d4')
+#         qp.setPen(col)
+#
+#         qp.setBrush(QColor(255, 0, 0))
+#         qp.drawRect(450,50,90,60)
+
+
+
+    # def drawRectangles(self, qp):
+    #     col = QColor(0, 0, 0)
+    #     col.setNamedColor('#d4d4d4')
+    #     qp.setPen(col)
+    #
+    #     qp.setBrush(QColor(255, 0, 0))
+    #     qp.drawRect(150, 50, 90, 60)
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ import sys
 from copy import deepcopy
 
 from PIL.ImageQt import ImageQt
+from PIL import Image, ImageDraw, ImageFont
 from PyQt5.QtWidgets import QInputDialog, QFileDialog, QMessageBox, QSizePolicy, QVBoxLayout, QSizePolicy,QDockWidget,QMainWindow,QScroller
 from PIL import Image
 from PyQt5 import QtCore, QtGui
@@ -32,7 +33,7 @@ fg_color = 'white'
 class MRI(QMainWindow ):
     def __init__(self):
         super(MRI,self).__init__()
-        loadUi('MRI-Phantom22.ui',self)
+        loadUi('MRI-Phantom.ui',self)
         self.setWindowTitle('MRI-Phantom')
         #self.b1.clicked.connect(self.on_click)
         self.cb.activated[str].connect(self.temp_var)
@@ -43,6 +44,7 @@ class MRI(QMainWindow ):
         self.colors =self.get_spaced_colors(5)
         print(self.colors)
         self.i=0
+
 
 
         #self.setAcceptHoverEvents(True)
@@ -65,7 +67,7 @@ class MRI(QMainWindow ):
         cur_txt = self.cb.currentText()
         self.num, ok = QInputDialog.getInt(self, "integer input dialog", "enter a number")
         if cur_txt == "Shepp-Logan phantom" and self.num!=0 and ok :
-            self.Display(13,self.num)
+            self.Display(3,self.num)
         else:
             self.l1.hide()
 
@@ -82,24 +84,30 @@ class MRI(QMainWindow ):
         array = self.Phantom(model_no, size)
         self.img = self.convertArrayToImage(array)
         self.img.save('img.png')
-        pixmap = self.ShowImage(self.img)
+        qimage = ImageQt(self.img)
+        pixmap = QPixmap.fromImage(qimage)
+        self.pixmap = QPixmap(pixmap)
+        pixmap = self.pixmap.scaled(self.l1.width(), self.l1.height(), QtCore.Qt.KeepAspectRatio)
         self.l1.setPixmap(pixmap)
         # Mouse Event
         self.l1.mousePressEvent = self.getPixel
         self.l1.mouseMoveEvent=self.mouseMoveEvent
+        self.l1.paintEvent = self.paintEvent
+        self.l4.mousePressEvent = self.getpixels
+
+
         #self.l1.mousePressEvent=self.wheelEvent
         array_with_time = self.setTime(self.img)
         # construct t1 image
         self.array_t1 = self.Return(array_with_time, 1)
-        # img_t1 = self.convertArrayToImage(self.array_t1)
-        # pixmap_t1 = self.ShowImage(img_t1)
-        # self.l2.setPixmap(pixmap_t1)
+        img_t1 = self.convertArrayToImage(self.array_t1)
+        pixmap_t1 = self.ShowImage(img_t1)
+        self.l2.setPixmap(pixmap_t1)
         # construct t2 image
         self.array_t2 = self.Return(array_with_time, 2)
         img_t2 = self.convertArrayToImage(self.array_t2)
         pixmap_t2 = self.ShowImage(img_t2)
         self.l2.setPixmap(pixmap_t2)
-        # print(self.l1.width())
         # I = np.dstack([img, img, img])
         # x = 73
         # y = 75
@@ -212,22 +220,47 @@ class MRI(QMainWindow ):
     def getPixel (self, event):
         self.x = event.pos().x()
         self.y = event.pos().y()
-        print('before',self.x, self.y)
-        self.ratio = self.num / self.l1.width()
-        if(self.x>self.num):
+        print('real x, y',self.x, self.y)
+        print("width",self.l1.width())
+        print("width", self.l1.height())
+        #mapping for painting
+        self.xratio = self.num / self.l1.width()
+        self.yratio = self.num / self.l1.height()
+        self.x_map= self.xratio * self.x
+        self.y_map = self.yratio * self.y
+        self.x_paint = self.x_map
+        self.y_paint = self.y_map
+        self.x_T = int(self.x_map)
+        self.y_T = int(self.y_map)
+        # #mapping for time
+        # if(self.x>=self.num):
+        #     self.x_T = int(self.xratio * self.x)
+        # else:
+        #     self.x_T=self.x
+        #
+        # if (self.y >= self.num):
+        #       self.y_T = int(self.yratio * self.y)
+        # else:
+        #     self.y_T = self.y
 
-            self.x=int(self.ratio*self.x)
 
-        if (self.y > self.num):
-            self.y = int(self.ratio * self.y)
+        print('paint x, y', self.x_paint, self.y_paint)
 
-        print("t1",self.array_t1[self.y][self.x])
-        print("t2",self.array_t2[self.y][self.x])
-        print(self.x,self.y)
+        print("time index",self.x_T,self.y_T)
+        print("t1",self.array_t1[self.y_T][self.x_T])
+        print("t2",self.array_t2[self.y_T][self.x_T])
+        print("after ratio)",self.x,self.y)
         if(self.i<5):
-          self.plotting(self.array_t1[self.y][self.x],self.array_t2[self.y][self.x])
+          self.plotting(self.array_t1[self.y_T][self.x_T],self.array_t2[self.y_T][self.x_T])
           self.tabWidget.setCurrentIndex(1)
-        print(self.l1.width())
+          self.Paint()
+
+
+
+    def getpixels (self,event):
+            self.x = event.pos().x()
+            self.y = event.pos().y()
+            print('before', self.x, self.y)
 
     def mouseMoveEvent(self, e):
 
@@ -255,7 +288,67 @@ class MRI(QMainWindow ):
         return [(int(i[:2], 16), int(i[2:4], 16), int(i[4:], 16)) for i in colors]
 
 
+    def Paint(self):
+        #trial 1
+        # draw = ImageDraw.Draw(img)
+        # print("x,y",type(x),type(y),x,y)
+        # if(x>self.num):
+        #
+        #     x=int(self.ratio*x)
+        #
+        # if (y > self.num):
+        #     y = int(self.ratio * y)
+        #
+        # draw.rectangle(((x-2, y++-2), (x+2, y+2)), outline="#ff8888")
+        # del draw
+        # self.pixmap = self.ShowImage(img)
+        # self.l1.setPixmap(self.pixmap)
+        #trial 2
+        # QApplication.processEvents()
+        # self.painterInstance = QPainter(self.pixmap)  # b3mel opject
+        # self.painterInstance.begin(self)
+        # self.penRectangle = QPen(QtCore.Qt.red)  # yehdd el elon
+        # self.penRectangle.setWidth(1)
+        # self.penPoint = QPen(QtCore.Qt.blue)
+        # self.penPoint.setWidth(1)  #
+        # self.painterInstance.setPen(self.penPoint)  # apply el lon
+        # self.painterInstance.drawRect(self.y_test, self.x_test, 1, 1)
+        # self.painterInstance.setPen(self.penRectangle)
+        # self.painterInstance.drawRect(self.y_test-1, self.x_test-1, 2, 2)
+        # self.painterInstance.end()
+        # print(self.x_test,self.y_test)
+        # result =self.pixmap.scaled(self.l1.width(), self.l1.height(), QtCore.Qt.KeepAspectRatio)  # scale 3la elabel
+        # self.l1.setPixmap(result)
+        # self.painterInstance.end()
+        #trial3
+        QApplication.processEvents()
+        # convert image file into pixmap
+        #self.pixmap_image = QtGui.QPixmap('img.png')
 
+        # create painter instance with pixmap
+
+        self.painterInstance = QtGui.QPainter(self.pixmap)
+        self.painterInstance.begin(self)
+
+        # set rectangle color and thickness
+        self.penRectangle = QtGui.QPen(QtCore.Qt.green)
+        self.penRectangle.setWidth(1)
+        self.penPoint = QtGui.QPen(QtCore.Qt.blue)
+        self.penRectangle.setWidth(1)
+        self.painterInstance.setPen(self.penPoint)
+        self.painterInstance.drawPoint(int(self.x_paint), int(self.y_paint))
+
+
+        # draw rectangle on painter
+        self.painterInstance.setPen(self.penRectangle)
+        self.painterInstance.drawRect(self.x_paint-2.5, self.y_paint-2.5, 5, 5)
+        print("test",self.x_paint,self.y_paint)
+        # set pixmap onto the label widget
+
+        pixmap_image = self.pixmap.scaled(self.l1.width(), self.l1.height(), QtCore.Qt.KeepAspectRatio)
+        self.l1.setPixmap(pixmap_image)
+        self.l1.show()
+        self.painterInstance.end()
 
     def GraphicsView (self):
         # create plot
@@ -286,9 +379,9 @@ class MRI(QMainWindow ):
     def K_Space(self):
 
 
-        tr = 5*np.average(self.array_t1)
+        tr = np.average(self.array_t1)
         print(tr)
-        te = 150
+        te = 30
         k_space = np.zeros((30, 30), dtype=np.complex)
 
         signal = np.ones(30)
@@ -310,11 +403,6 @@ class MRI(QMainWindow ):
 
         test1 = np.absolute(np.fft.ifft2(k_space))
         return test1
-
-
-
-
-
 
 
 
