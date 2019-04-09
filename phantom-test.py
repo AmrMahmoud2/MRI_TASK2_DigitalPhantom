@@ -3,7 +3,7 @@ import sys
 from copy import deepcopy
 
 from PIL.ImageQt import ImageQt
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 from PyQt5.QtWidgets import QInputDialog, QFileDialog, QMessageBox, QSizePolicy, QVBoxLayout, QSizePolicy,QDockWidget,QMainWindow,QScroller
 from PIL import Image
 from PyQt5 import QtCore, QtGui
@@ -67,7 +67,7 @@ class MRI(QMainWindow ):
         cur_txt = self.cb.currentText()
         self.num, ok = QInputDialog.getInt(self, "integer input dialog", "enter a number")
         if cur_txt == "Shepp-Logan phantom" and self.num!=0 and ok :
-            self.Display(3,self.num)
+            self.Display(2,self.num)
         else:
             self.l1.hide()
 
@@ -90,10 +90,11 @@ class MRI(QMainWindow ):
         pixmap = self.pixmap.scaled(self.l1.width(), self.l1.height(), QtCore.Qt.KeepAspectRatio)
         self.l1.setPixmap(pixmap)
         # Mouse Event
-        self.l1.mousePressEvent = self.getPixel
+        self.l1.mouseDoubleClickEvent = self.getPixel
         self.l1.mouseMoveEvent=self.mouseMoveEvent
         self.l1.paintEvent = self.paintEvent
-        self.l4.mousePressEvent = self.getpixels
+        self.l1.mousePressEvent = self.getpixels
+        self.i = 1
 
 
         #self.l1.mousePressEvent=self.wheelEvent
@@ -107,7 +108,7 @@ class MRI(QMainWindow ):
         self.array_t2 = self.Return(array_with_time, 2)
         img_t2 = self.convertArrayToImage(self.array_t2)
         pixmap_t2 = self.ShowImage(img_t2)
-        self.l2.setPixmap(pixmap_t2)
+        self.l3.setPixmap(pixmap_t2)
         # I = np.dstack([img, img, img])
         # x = 73
         # y = 75
@@ -117,8 +118,8 @@ class MRI(QMainWindow ):
         # self.l2.setPixmap(pixmap_test)
         K_array=self.K_Space()
         img_K = self.convertArrayToImage(K_array)
-        pixmap_t2 = self.ShowImage(img_K)
-        self.l3.setPixmap(pixmap_t2)
+        pixmap_k = self.ShowImage(img_K)
+        self.l4.setPixmap(pixmap_k)
 
 
 
@@ -176,7 +177,7 @@ class MRI(QMainWindow ):
     def Set_T1(self,Array_3d,Max_value,Min_Value):
         for x in range(len(Array_3d)):
             for y in range(len(Array_3d)):
-                if (Array_3d[x][y][0] ==Max_value) :
+                if (Array_3d[x][y][0]==Max_value) :
                     Array_3d[x][y][1]=4250
                 else:
                     if (Array_3d[x][y][0]==Min_Value):
@@ -258,17 +259,39 @@ class MRI(QMainWindow ):
 
 
     def getpixels (self,event):
-            self.x = event.pos().x()
-            self.y = event.pos().y()
-            print('before', self.x, self.y)
+            self.x_single = event.pos().x()
+            self.y_single = event.pos().y()
+            print('single', self.x_single, self.y_single)
 
-    def mouseMoveEvent(self, e):
+    def mouseMoveEvent(self, event):
+        x = event.pos().x()
+        y = event.pos().y()
+        if x in range(self.x_single - 10, self.x_single + 10) and y < self.y_single and y > 0 :
+            self.i = self.i + 0.1
+            self.Enhancer(self.i)
+        elif x in range(self.x_single - 10, self.x_single + 10) and y> self.y_single and y< self.l1.height():
+            self.i = self.i - 0.1
+            self.Enhancer(self.i)
 
-        x = e.x()
-        y = e.y()
 
-        text = "x: {0},  y: {1}".format(x, y)
-        print(text)
+    def Enhancer(self,i):
+        enhancer = ImageEnhance.Brightness(self.img)
+        self.enhanced_im = enhancer.enhance(self.i)
+        qimage = ImageQt(self.enhanced_im)
+        pixmap = QPixmap.fromImage(qimage)
+        self.pixmap = QPixmap(pixmap)
+        #pixmap = self.pixmap.scaled(self.l1.width(), self.l1.height(), QtCore.Qt.KeepAspectRatio)
+        self.l1.setPixmap(pixmap)
+
+
+        print(self.i)
+        # elif self.yy in range(y - 10, y + 10) and self.xx > x:
+        #     self.j = self.j + 10
+        # elif self.yy in range(y - 10, y + 10) and self.xx < x:
+        #     self.j = self.j - 10
+
+        #text = "x: {0},  y: {1}".format(x, y)
+        #print(text)
 
     def plotting(self,T1,T2):
         # define the data
@@ -379,12 +402,11 @@ class MRI(QMainWindow ):
     def K_Space(self):
 
 
-        tr = np.average(self.array_t1)
-        print(tr)
-        te = 30
+        tr = 3*np.average(self.array_t1)
+        te = 150
         k_space = np.zeros((30, 30), dtype=np.complex)
 
-        signal = np.ones(30)
+        signal = np.ones(30)*np.sin(45*(np.pi/180))
 
         for kspacerow in range(30):
 
@@ -412,6 +434,7 @@ class MRI(QMainWindow ):
                 if (array[i][j] == value).all():
                     array2 = np.delete(array, array[i][j])
         return array2
+
 
 
 
