@@ -37,13 +37,28 @@ class MRI(QMainWindow ):
         self.setWindowTitle('MRI-Phantom')
         #self.b1.clicked.connect(self.on_click)
         self.cb.activated[str].connect(self.temp_var)
+        self.b_t1.clicked.connect(self.Display_T1)
+        self.b_t2.clicked.connect(self.Display_T2)
+        self.b_k.clicked.connect(self.Display_K_Space)
+        self.b_reset.clicked.connect(self.Reset)
+        self.b_theta.clicked.connect(self.Get_Theta)
+        self.b_tr.clicked.connect(self.Get_TR)
+        self.b_te.clicked.connect(self.Get_TE)
+
         self.GraphicsView()
+
+
+
+
+
+
         # self.r=255
         # self.g=0
         # self.b=0
         self.colors =self.get_spaced_colors(5)
         print(self.colors)
         self.i=0
+        self.bp = 1
 
 
 
@@ -66,10 +81,25 @@ class MRI(QMainWindow ):
     def temp_var(self):
         cur_txt = self.cb.currentText()
         self.num, ok = QInputDialog.getInt(self, "integer input dialog", "enter a number")
-        if cur_txt == "Shepp-Logan phantom" and self.num!=0 and ok :
+        if cur_txt == "Shepp-Logan phantom (10 ellipses)" and self.num!=0 and ok :
+            self.Display(1,self.num)
+        if cur_txt == "Piecewise-Smooth Shepp-Logan phantom" and self.num!=0 and ok :
             self.Display(2,self.num)
-        else:
-            self.l1.hide()
+        if cur_txt == "phantom with vertical ellipses" and self.num!=0 and ok :
+            self.Display(3,self.num)
+        if cur_txt == "1 cone" and self.num!=0 and ok :
+            self.Display(5,self.num)
+        if cur_txt == "1 rectangular" and self.num!=0 and ok :
+            self.Display(6,self.num)
+        if cur_txt == "composite of 6 gaussians + 1 parabola" and self.num!=0 and ok :
+            self.Display(8,self.num)
+        if cur_txt == "composite - rectangles and ellipses " and self.num!=0 and ok :
+            self.Display(12,self.num)
+        if cur_txt == "rectangles, 'resolution' phantom" and self.num!=0 and ok :
+            self.Display(13,self.num)
+
+
+
 
 
 
@@ -83,6 +113,7 @@ class MRI(QMainWindow ):
     def Display(self,model_no,size):
         array = self.Phantom(model_no, size)
         self.img = self.convertArrayToImage(array)
+        self.phantom_Pixels_array=np.asarray(self.img)
         self.img.save('img.png')
         qimage = ImageQt(self.img)
         pixmap = QPixmap.fromImage(qimage)
@@ -94,20 +125,27 @@ class MRI(QMainWindow ):
         self.l1.mouseMoveEvent=self.mouseMoveEvent
         self.l1.paintEvent = self.paintEvent
         self.l1.mousePressEvent = self.getpixels
-        self.i = 1
 
 
-        #self.l1.mousePressEvent=self.wheelEvent
-        array_with_time = self.setTime(self.img)
+
+
+
+
+
+    def Display_T1(self):
         # construct t1 image
-        self.array_t1 = self.Return(array_with_time, 1)
-        img_t1 = self.convertArrayToImage(self.array_t1)
-        pixmap_t1 = self.ShowImage(img_t1)
+        self.array_with_time = self.setTime(self.img)
+        self.array_t1 = self.Return(self.array_with_time, 1)
+        self.img_t1 = self.convertArrayToImage(self.array_t1)
+        pixmap_t1 = self.ShowImage(self.img_t1)
         self.l2.setPixmap(pixmap_t1)
+
+    def Display_T2(self):
         # construct t2 image
-        self.array_t2 = self.Return(array_with_time, 2)
-        img_t2 = self.convertArrayToImage(self.array_t2)
-        pixmap_t2 = self.ShowImage(img_t2)
+        self.array_with_time = self.setTime(self.img)
+        self.array_t2 = self.Return(self.array_with_time, 2)
+        self.img_t2 = self.convertArrayToImage(self.array_t2)
+        pixmap_t2 = self.ShowImage(self.img_t2)
         self.l3.setPixmap(pixmap_t2)
         # I = np.dstack([img, img, img])
         # x = 73
@@ -116,10 +154,20 @@ class MRI(QMainWindow ):
         # highlight_img= Image.fromarray(I).convert('RGB')
         # pixmap_test=self.ShowImage(highlight_img)
         # self.l2.setPixmap(pixmap_test)
+    def Display_K_Space(self):
+        #K-Space
         K_array=self.K_Space()
         img_K = self.convertArrayToImage(K_array)
         pixmap_k = self.ShowImage(img_K)
         self.l4.setPixmap(pixmap_k)
+    def Reset(self):
+        qimage = ImageQt('img.png')
+        pixmap = QPixmap.fromImage(qimage)
+        self.pixmap = QPixmap(pixmap)
+        pixmap = self.pixmap.scaled(self.l1.width(), self.l1.height(), QtCore.Qt.KeepAspectRatio)
+        self.l1.setPixmap(pixmap)
+
+
 
 
 
@@ -174,28 +222,35 @@ class MRI(QMainWindow ):
             # print(d1[x])
         return d1
 
-    def Set_T1(self,Array_3d,Max_value,Min_Value):
+    def Set_T(self,Array_3d,Max_value,Min_Value,AVG):
         for x in range(len(Array_3d)):
             for y in range(len(Array_3d)):
-                if (Array_3d[x][y][0]==Max_value) :
-                    Array_3d[x][y][1]=4250
+                if (Array_3d[x][y][0]>=0 and Array_3d[x][y][0]<=Min_Value ) :
+                    Array_3d[x][y][1] = 250
+                    Array_3d[x][y][2] = 70
+
                 else:
-                    if (Array_3d[x][y][0]==Min_Value):
-                        Array_3d[x][y][1]=250
-                    else:
-                        Array_3d[x][y][1]=int(250+((Array_3d[x][y][0]*4000)/Max_value))
+                    if (Array_3d[x][y][0]>Min_Value and Array_3d[x][y][0]<=AVG):
+                        Array_3d[x][y][1] = 900
+                        Array_3d[x][y][2] = 50
+
+                    elif(Array_3d[x][y][0]>AVG and Array_3d[x][y][0]<=Max_value):
+
+                        Array_3d[x][y][1] = 4000
+                        Array_3d[x][y][2] = 2000
         return Array_3d
 
     def setTime(self,image):
         Pixels_Array = np.asarray(image)
-        self.Pixels_Array_Filterd=self.Filters(Pixels_Array,255)
+        #self.Pixels_Array_Filterd=self.Filters(Pixels_Array,255)
         Unique_Pixels_values= np.unique(Pixels_Array)
         Max_value=np.max(Unique_Pixels_values)
         Min_Value=np.min(Unique_Pixels_values)
+        AVG=np.average(Pixels_Array)
         Array_3d_With_intensity=self.Construct3DArray(Pixels_Array,0)
-        Array_3d_With_T1=self.Set_T1(Array_3d_With_intensity,Max_value,Min_Value)
-        Array_3d_With_T2 = self.Set_T2(Array_3d_With_T1, Max_value, Min_Value)
-        return (Array_3d_With_T2)
+        Array_3d_With_T1_T2=self.Set_T(Array_3d_With_intensity,Max_value,Min_Value,AVG)
+        #Array_3d_With_T2 = self.Set_T2(Array_3d_With_T1, Max_value, Min_Value)
+        return (Array_3d_With_T1_T2)
 
 
     def Set_T2(self,Array_3d,Max_value,Min_Value):
@@ -267,20 +322,19 @@ class MRI(QMainWindow ):
         x = event.pos().x()
         y = event.pos().y()
         if x in range(self.x_single - 10, self.x_single + 10) and y < self.y_single and y > 0 :
-            self.i = self.i + 0.1
-            self.Enhancer(self.i)
+            self.bp = self.bp + 0.01
+            self.Enhancer(self.bp)
         elif x in range(self.x_single - 10, self.x_single + 10) and y> self.y_single and y< self.l1.height():
-            self.i = self.i - 0.1
-            self.Enhancer(self.i)
+            self.bp = self.bp - 0.01
+            self.Enhancer(self.bp)
 
 
     def Enhancer(self,i):
         enhancer = ImageEnhance.Brightness(self.img)
-        self.enhanced_im = enhancer.enhance(self.i)
+        self.enhanced_im = enhancer.enhance(self.bp)
         qimage = ImageQt(self.enhanced_im)
         pixmap = QPixmap.fromImage(qimage)
         self.pixmap = QPixmap(pixmap)
-        #pixmap = self.pixmap.scaled(self.l1.width(), self.l1.height(), QtCore.Qt.KeepAspectRatio)
         self.l1.setPixmap(pixmap)
 
 
@@ -309,6 +363,7 @@ class MRI(QMainWindow ):
         colors = [hex(I)[2:].zfill(6) for I in range(200, max_value, interval)]
 
         return [(int(i[:2], 16), int(i[2:4], 16), int(i[4:], 16)) for i in colors]
+
 
 
     def Paint(self):
@@ -396,21 +451,28 @@ class MRI(QMainWindow ):
         self.graphicsView.setCentralItem(self.plt)
         self.graphicsView_2.setCentralItem(self.plt2)
 
+    def Get_Theta(self):
+        self.theta, ok = QInputDialog.getInt(self, "integer input dialog", "enter a Theta")
 
+    def Get_TR(self):
+        self.tr, ok = QInputDialog.getInt(self, "integer input dialog", "enter a Time to Repeat")
+
+    def Get_TE(self):
+        self.te, ok = QInputDialog.getInt(self, "integer input dialog", "enter a Time to Echo")
 
 
     def K_Space(self):
 
-
-        tr = 3*np.average(self.array_t1)
-        te = 150
+        self.tr = 100*np.average(self.array_t1)
+        self.te = 300
+        print(self.tr,self.te)
         k_space = np.zeros((30, 30), dtype=np.complex)
 
-        signal = np.ones(30)*np.sin(45*(np.pi/180))
+        signal =np.ones(30)*np.sin(self.theta*(np.pi/180))
 
         for kspacerow in range(30):
 
-            signal = signal * np.exp(-te / self.array_t2)
+            signal = signal * np.exp(-self.te / self.array_t2)
 
             for kspacecol in range(30):
                 GX = 2 * np.pi * kspacerow / 30
@@ -421,9 +483,9 @@ class MRI(QMainWindow ):
                         total_theta = (GX * i + GY * j)
                         k_space[kspacerow, kspacecol] += signal[i, j] * np.exp(-1j * total_theta)
 
-            signal = 1 - np.exp(-tr / self.array_t1)
+            signal = 1 - np.exp(-self.tr / self.array_t1)
 
-        test1 = np.absolute(np.fft.ifft2(k_space))
+        test1 = (np.fft.ifft2(k_space))
         return test1
 
 
