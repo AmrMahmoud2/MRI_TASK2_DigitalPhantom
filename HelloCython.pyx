@@ -29,12 +29,17 @@ cpdef  K_Space(tr, te,theta,num,array_t1,array_t2):
 
    # self.tr = 100*np.average(self.array_t1)
         # self.te = 300
-        print(tr,te)
-        k_space = np.zeros((num, num), dtype=np.complex)
-        signal =np.ones(num)*np.sin(theta*(np.pi/180))
-        for i in range(5):
-            signal = signal * np.exp(-te / array_t2)
-            signal = 1 - np.exp(-tr / array_t1)
+      k_space = np.zeros((num, num), dtype=np.complex)
+      signal =np.ones((num,num))
+      for i in range(5):
+          signal = signal * np.exp(-te / array_t2)
+          signal = 1 - np.exp(-tr / array_t1)
+      for i in range (0,num) :
+        for j in range (0,num,4):
+            signal[i][j]=signal[i][j]*np.sin(((np.pi)/num)*i)
+        print(signal)
+        #K-space
+        signal =signal*np.sin(theta*(np.pi/180))
         for kspacerow in range(num):
             QApplication.processEvents()
             signal = signal * np.exp(-te / array_t2)
