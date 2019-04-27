@@ -45,7 +45,6 @@ class MRI(QMainWindow ):
         self.b_theta.clicked.connect(self.Get_Theta)
         self.b_tr.clicked.connect(self.Get_TR)
         self.b_te.clicked.connect(self.Get_TE)
-
         self.GraphicsView()
 
 
@@ -114,6 +113,9 @@ class MRI(QMainWindow ):
         self.i=0
         self.bp = 1
         self.ratio_count=1
+        self.theta=90
+        self.tr=1000
+        self.te=10
         array = self.Phantom(model_no, size)
         self.nomalized_phantom_array=self.Normalization(array)
         self.img=self.convertArrayToImage(self.nomalized_phantom_array)
@@ -220,12 +222,12 @@ class MRI(QMainWindow ):
      sizeN = size
      #This will generate 256x256 phantom from the model
      self.phantom = TomoP2D.Model(model, sizeN,'/home/sohila/Documents/BIO-MATERIALS/Third-Year/Second-Term/MRI/Task2-MRI/phantoms/TomoPhantom/PhantomLibrary/models/Phantom2DLibrary.dat')
-     angles_num = int(0.5*np.pi*sizeN) # angles number
-     angles = np.linspace(0,180,angles_num,dtype='float32')
-     angles_rad = angles*(np.pi/180)
+     angles_num = int(sizeN) # angles number
+     self.angles = np.linspace(0,180,angles_num,dtype='float32')
+     angles_rad = self.angles*(np.pi/180)
      P = int(np.sqrt(2)*sizeN) #detectors
      #This will generate a sinogram of the model
-     sino_an = TomoP2D.ModelSino(model, sizeN, P, angles, '/home/sohila/Documents/BIO-MATERIALS/Third-Year/Second-Term/MRI/Task2-MRI/phantoms/TomoPhantom/PhantomLibrary/models/Phantom2DLibrary.dat')
+     sino_an = TomoP2D.ModelSino(model, sizeN, P,self.angles, '/home/sohila/Documents/BIO-MATERIALS/Third-Year/Second-Term/MRI/Task2-MRI/phantoms/TomoPhantom/PhantomLibrary/models/Phantom2DLibrary.dat')
      # pp = {'Obj': TomoP2D.Objects2D.RECTANGLE,
      #       'C0': 9.00,
      #       'x0': 0.3,

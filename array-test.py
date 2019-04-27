@@ -43,53 +43,53 @@ import time
 #         self.l1.setPixmap(pixmap)
 
 
-def Construct3DArray (Array2d):
-    d1 = [[[1 for col in range(4)]for row in range(len(Array2d))] for x in range(len(Array2d))]
-    for x in range(len(d1)):
-        for y in range(len(d1)):
-            d1[x][y][0] = Array2d[x][y]
-        #print(d1[x])
-    return d1
-
-def Return (original_array,index):
-    d2=np.empty((len(original_array),len(original_array)))
-   #print(original_array.shape)
-    for l in range(len(original_array)):
-        for m in range(len(original_array)):
-          d2[l][m]=original_array[l][m][index]
-        return d2
-
-
-
-a = np.array([[49, 49, 12, 90, 42, 13, 12, 12, 12, 3],
-              [91, 58, 92, 16, 78, 13, 12, 12, 12, 3],
-              [97, 19, 58, 84, 84, 13, 12, 12, 12, 3],
-              [86, 31, 80, 78, 69, 13, 12, 12, 12, 3],
-              [29, 95, 38, 51, 92, 13, 12, 12, 12, 3],
-              [29, 95, 38, 51, 92, 13, 12, 12, 12, 3],
-              [29, 95, 38, 51, 101, 13, 12, 12, 12,3],
-              [29, 95, 38, 51, 92, 13, 12, 12, 12, 3],
-              [29, 95, 38, 51, 92, 13, 12, 12, 12, 3],
-              [29, 95, 38, 51, 92, 13, 12, 12, 12, 3]])
-
-b=np.array(Construct3DArray(a))
-# u=removeDuplicates(b)
-# for x in range(len(u)):
-#   print(u[x])
-# print("unique")
-# for x in range(len(b)):
-#     print(b[x])
-# print("sorted")
-# c=sorted(b, key=lambda b: b[1],reverse=True)
-# #c=np.sort(b, axis=0)
-# for x in range(len(c)):
-#     print(c[x])
-
-print(b.shape[2])
-print(len(b))
-#c=np.array((removeDuplicates(a)))
-c=np.unique(a)
-print(c)
+# def Construct3DArray (Array2d):
+#     d1 = [[[1 for col in range(4)]for row in range(len(Array2d))] for x in range(len(Array2d))]
+#     for x in range(len(d1)):
+#         for y in range(len(d1)):
+#             d1[x][y][0] = Array2d[x][y]
+#         #print(d1[x])
+#     return d1
+#
+# def Return (original_array,index):
+#     d2=np.empty((len(original_array),len(original_array)))
+#    #print(original_array.shape)
+#     for l in range(len(original_array)):
+#         for m in range(len(original_array)):
+#           d2[l][m]=original_array[l][m][index]
+#         return d2
+#
+#
+#
+# a = np.array([[49, 49, 12, 90, 42, 13, 12, 12, 12, 3],
+#               [91, 58, 92, 16, 78, 13, 12, 12, 12, 3],
+#               [97, 19, 58, 84, 84, 13, 12, 12, 12, 3],
+#               [86, 31, 80, 78, 69, 13, 12, 12, 12, 3],
+#               [29, 95, 38, 51, 92, 13, 12, 12, 12, 3],
+#               [29, 95, 38, 51, 92, 13, 12, 12, 12, 3],
+#               [29, 95, 38, 51, 101, 13, 12, 12, 12,3],
+#               [29, 95, 38, 51, 92, 13, 12, 12, 12, 3],
+#               [29, 95, 38, 51, 92, 13, 12, 12, 12, 3],
+#               [29, 95, 38, 51, 92, 13, 12, 12, 12, 3]])
+#
+# b=np.array(Construct3DArray(a))
+# # u=removeDuplicates(b)
+# # for x in range(len(u)):
+# #   print(u[x])
+# # print("unique")
+# # for x in range(len(b)):
+# #     print(b[x])
+# # print("sorted")
+# # c=sorted(b, key=lambda b: b[1],reverse=True)
+# # #c=np.sort(b, axis=0)
+# # for x in range(len(c)):
+# #     print(c[x])
+#
+# print(b.shape[2])
+# print(len(b))
+# #c=np.array((removeDuplicates(a)))
+# c=np.unique(a)
+# print(c)
 
 
 # def main():
@@ -114,3 +114,20 @@ print(c)
 #              if ((listofElements[x][y] not in uniqueList[:])):
 #                 uniqueList[x]=listofElements[x][y]
 #     return uniqueList
+
+# test startup cycle
+
+signal =np.ones((4,4))
+# array_t2=np.empty((4,4),dtype=float)
+# array_t1=np.empty((4,4),dtype=float)
+array_t2=np.array([[900.0,900.0,900.0,900.0],[900.0,900.0,900.0,500.0],[900.0,900.0,500.0,250.0],[900.0,500.0,500.0,250.0]])
+array_t1=np.array([[90,90,90,90],[90,90,90,50],[90,90,50,40],[90,50,50,40]])
+te=10
+tr=1000
+for i in range(5):
+    signal = signal * np.exp(-te/ array_t2)
+    signal = signal*(1 - np.exp(-tr/ array_t1))
+
+print(signal)
+
+
