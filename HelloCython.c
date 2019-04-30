@@ -999,7 +999,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 
 /* Module declarations from 'HelloCython' */
-static PyObject *__pyx_f_11HelloCython_K_Space(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_11HelloCython_K_Space(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "HelloCython"
 int __pyx_module_is_main_HelloCython = 0;
 
@@ -1036,7 +1036,6 @@ static const char __pyx_k_theta[] = "theta";
 static const char __pyx_k_zeros[] = "zeros";
 static const char __pyx_k_Figure[] = "Figure";
 static const char __pyx_k_QtCore[] = "QtCore";
-static const char __pyx_k_angles[] = "angles";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_loadUi[] = "loadUi";
 static const char __pyx_k_random[] = "random";
@@ -1107,7 +1106,6 @@ static PyObject *__pyx_n_s_QtCore;
 static PyObject *__pyx_n_s_QtGui;
 static PyObject *__pyx_n_s_TomoP2D;
 static PyObject *__pyx_n_s__2;
-static PyObject *__pyx_n_s_angles;
 static PyObject *__pyx_n_s_array_t1;
 static PyObject *__pyx_n_s_array_t2;
 static PyObject *__pyx_n_s_cline_in_traceback;
@@ -1149,7 +1147,7 @@ static PyObject *__pyx_n_s_time;
 static PyObject *__pyx_n_s_tomophantom;
 static PyObject *__pyx_n_s_tr;
 static PyObject *__pyx_n_s_zeros;
-static PyObject *__pyx_pf_11HelloCython_K_Space(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_tr, PyObject *__pyx_v_te, PyObject *__pyx_v_theta, PyObject *__pyx_v_num, PyObject *__pyx_v_array_t1, PyObject *__pyx_v_array_t2, PyObject *__pyx_v_angles); /* proto */
+static PyObject *__pyx_pf_11HelloCython_K_Space(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_tr, PyObject *__pyx_v_te, PyObject *__pyx_v_theta, PyObject *__pyx_v_num, PyObject *__pyx_v_array_t1, PyObject *__pyx_v_array_t2); /* proto */
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_2;
@@ -1161,13 +1159,13 @@ static PyObject *__pyx_tuple_;
 /* "HelloCython.pyx":28
  * 
  * 
- * cpdef  K_Space(tr, te,theta,num,array_t1,array_t2,angles):             # <<<<<<<<<<<<<<
+ * cpdef  K_Space(tr, te,theta,num,array_t1,array_t2):             # <<<<<<<<<<<<<<
  * 
  *    # self.tr = 100*np.average(self.array_t1)
  */
 
 static PyObject *__pyx_pw_11HelloCython_1K_Space(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_11HelloCython_K_Space(PyObject *__pyx_v_tr, PyObject *__pyx_v_te, PyObject *__pyx_v_theta, PyObject *__pyx_v_num, PyObject *__pyx_v_array_t1, PyObject *__pyx_v_array_t2, CYTHON_UNUSED PyObject *__pyx_v_angles, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_11HelloCython_K_Space(PyObject *__pyx_v_tr, PyObject *__pyx_v_te, PyObject *__pyx_v_theta, PyObject *__pyx_v_num, PyObject *__pyx_v_array_t1, PyObject *__pyx_v_array_t2, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_k_space = NULL;
   PyObject *__pyx_v_signal = NULL;
   CYTHON_UNUSED PyObject *__pyx_v_signalx = NULL;
@@ -2586,7 +2584,7 @@ static PyObject *__pyx_f_11HelloCython_K_Space(PyObject *__pyx_v_tr, PyObject *_
   /* "HelloCython.pyx":28
  * 
  * 
- * cpdef  K_Space(tr, te,theta,num,array_t1,array_t2,angles):             # <<<<<<<<<<<<<<
+ * cpdef  K_Space(tr, te,theta,num,array_t1,array_t2):             # <<<<<<<<<<<<<<
  * 
  *    # self.tr = 100*np.average(self.array_t1)
  */
@@ -2637,19 +2635,16 @@ static PyObject *__pyx_pw_11HelloCython_1K_Space(PyObject *__pyx_self, PyObject 
   PyObject *__pyx_v_num = 0;
   PyObject *__pyx_v_array_t1 = 0;
   PyObject *__pyx_v_array_t2 = 0;
-  PyObject *__pyx_v_angles = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("K_Space (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_tr,&__pyx_n_s_te,&__pyx_n_s_theta,&__pyx_n_s_num,&__pyx_n_s_array_t1,&__pyx_n_s_array_t2,&__pyx_n_s_angles,0};
-    PyObject* values[7] = {0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_tr,&__pyx_n_s_te,&__pyx_n_s_theta,&__pyx_n_s_num,&__pyx_n_s_array_t1,&__pyx_n_s_array_t2,0};
+    PyObject* values[6] = {0,0,0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
-        case  7: values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
-        CYTHON_FALLTHROUGH;
         case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
         CYTHON_FALLTHROUGH;
         case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
@@ -2674,43 +2669,37 @@ static PyObject *__pyx_pw_11HelloCython_1K_Space(PyObject *__pyx_self, PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_te)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 7, 7, 1); __PYX_ERR(0, 28, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 6, 6, 1); __PYX_ERR(0, 28, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_theta)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 7, 7, 2); __PYX_ERR(0, 28, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 6, 6, 2); __PYX_ERR(0, 28, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_num)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 7, 7, 3); __PYX_ERR(0, 28, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 6, 6, 3); __PYX_ERR(0, 28, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_array_t1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 7, 7, 4); __PYX_ERR(0, 28, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 6, 6, 4); __PYX_ERR(0, 28, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_array_t2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 7, 7, 5); __PYX_ERR(0, 28, __pyx_L3_error)
-        }
-        CYTHON_FALLTHROUGH;
-        case  6:
-        if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_angles)) != 0)) kw_args--;
-        else {
-          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 7, 7, 6); __PYX_ERR(0, 28, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("K_Space", 1, 6, 6, 5); __PYX_ERR(0, 28, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "K_Space") < 0)) __PYX_ERR(0, 28, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 7) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
@@ -2719,7 +2708,6 @@ static PyObject *__pyx_pw_11HelloCython_1K_Space(PyObject *__pyx_self, PyObject 
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
       values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
-      values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
     }
     __pyx_v_tr = values[0];
     __pyx_v_te = values[1];
@@ -2727,30 +2715,29 @@ static PyObject *__pyx_pw_11HelloCython_1K_Space(PyObject *__pyx_self, PyObject 
     __pyx_v_num = values[3];
     __pyx_v_array_t1 = values[4];
     __pyx_v_array_t2 = values[5];
-    __pyx_v_angles = values[6];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("K_Space", 1, 7, 7, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 28, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("K_Space", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 28, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("HelloCython.K_Space", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11HelloCython_K_Space(__pyx_self, __pyx_v_tr, __pyx_v_te, __pyx_v_theta, __pyx_v_num, __pyx_v_array_t1, __pyx_v_array_t2, __pyx_v_angles);
+  __pyx_r = __pyx_pf_11HelloCython_K_Space(__pyx_self, __pyx_v_tr, __pyx_v_te, __pyx_v_theta, __pyx_v_num, __pyx_v_array_t1, __pyx_v_array_t2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11HelloCython_K_Space(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_tr, PyObject *__pyx_v_te, PyObject *__pyx_v_theta, PyObject *__pyx_v_num, PyObject *__pyx_v_array_t1, PyObject *__pyx_v_array_t2, PyObject *__pyx_v_angles) {
+static PyObject *__pyx_pf_11HelloCython_K_Space(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_tr, PyObject *__pyx_v_te, PyObject *__pyx_v_theta, PyObject *__pyx_v_num, PyObject *__pyx_v_array_t1, PyObject *__pyx_v_array_t2) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("K_Space", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_11HelloCython_K_Space(__pyx_v_tr, __pyx_v_te, __pyx_v_theta, __pyx_v_num, __pyx_v_array_t1, __pyx_v_array_t2, __pyx_v_angles, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_11HelloCython_K_Space(__pyx_v_tr, __pyx_v_te, __pyx_v_theta, __pyx_v_num, __pyx_v_array_t1, __pyx_v_array_t2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3078,7 +3065,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_QtGui, __pyx_k_QtGui, sizeof(__pyx_k_QtGui), 0, 0, 1, 1},
   {&__pyx_n_s_TomoP2D, __pyx_k_TomoP2D, sizeof(__pyx_k_TomoP2D), 0, 0, 1, 1},
   {&__pyx_n_s__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 0, 1, 1},
-  {&__pyx_n_s_angles, __pyx_k_angles, sizeof(__pyx_k_angles), 0, 0, 1, 1},
   {&__pyx_n_s_array_t1, __pyx_k_array_t1, sizeof(__pyx_k_array_t1), 0, 0, 1, 1},
   {&__pyx_n_s_array_t2, __pyx_k_array_t2, sizeof(__pyx_k_array_t2), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},

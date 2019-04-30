@@ -12,14 +12,24 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(805, 784)
+        MainWindow.resize(929, 900)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
+        MainWindow.setStyleSheet("background-image: url(:/background/back.jpg);")
+        MainWindow.setDocumentMode(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setStyleSheet("background-image: url(:/background/back.jpg);")
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
+        self.tab.setMaximumSize(QtCore.QSize(907, 807))
+        self.tab.setStyleSheet("")
         self.tab.setObjectName("tab")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.tab)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -38,42 +48,51 @@ class Ui_MainWindow(object):
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_2.addItem(spacerItem1, 9, 0, 1, 1)
         self.b_t1 = QtWidgets.QPushButton(self.tab)
-        self.b_t1.setStyleSheet("background-color: rgb(32, 74, 135);\n"
+        self.b_t1.setStyleSheet("background-color: rgb(238, 238, 236);\n"
+"color: rgb(238, 238, 236);\n"
 "font: 75 11pt \"URW Bookman L\";")
         self.b_t1.setObjectName("b_t1")
         self.gridLayout_2.addWidget(self.b_t1, 1, 0, 1, 1)
         self.b_t2 = QtWidgets.QPushButton(self.tab)
-        self.b_t2.setStyleSheet("background-color: rgb(32, 74, 135);\n"
+        self.b_t2.setStyleSheet("background-color: rgb(238, 238, 236);\n"
+"color: rgb(238, 238, 236);\n"
 "font: 75 11pt \"URW Bookman L\";")
         self.b_t2.setObjectName("b_t2")
         self.gridLayout_2.addWidget(self.b_t2, 2, 0, 1, 1)
         self.b_k = QtWidgets.QPushButton(self.tab)
         self.b_k.setStyleSheet("font: 75 11pt \"URW Bookman L\";\n"
-"background-color: rgb(32, 74, 135);")
+"background-color: rgb(238, 238, 236);\n"
+"color: rgb(238, 238, 236);")
         self.b_k.setObjectName("b_k")
         self.gridLayout_2.addWidget(self.b_k, 3, 0, 1, 1)
         self.b_theta = QtWidgets.QPushButton(self.tab)
-        self.b_theta.setStyleSheet("background-color: rgb(32, 74, 135);\n"
+        self.b_theta.setStyleSheet("background-color: rgb(238, 238, 236);\n"
+"color: rgb(238, 238, 236);\n"
 "font: 75 11pt \"URW Bookman L\";")
         self.b_theta.setObjectName("b_theta")
         self.gridLayout_2.addWidget(self.b_theta, 5, 0, 1, 1)
         self.b_tr = QtWidgets.QPushButton(self.tab)
-        self.b_tr.setStyleSheet("background-color: rgb(32, 74, 135);\n"
+        self.b_tr.setStyleSheet("background-color: rgb(238, 238, 236);\n"
+"color: rgb(238, 238, 236);\n"
 "font: 75 11pt \"URW Bookman L\";")
         self.b_tr.setObjectName("b_tr")
         self.gridLayout_2.addWidget(self.b_tr, 7, 0, 1, 1)
         self.b_te = QtWidgets.QPushButton(self.tab)
-        self.b_te.setStyleSheet("background-color: rgb(32, 74, 135);\n"
+        self.b_te.setStyleSheet("background-color: rgb(238, 238, 236);\n"
+"color: rgb(238, 238, 236);\n"
 "font: 75 11pt \"URW Bookman L\";")
         self.b_te.setObjectName("b_te")
         self.gridLayout_2.addWidget(self.b_te, 6, 0, 1, 1)
         self.b_reset = QtWidgets.QPushButton(self.tab)
-        self.b_reset.setStyleSheet("background-color: rgb(32, 74, 135);\n"
+        self.b_reset.setStyleSheet("background-color: rgb(238, 238, 236);\n"
+"color: rgb(238, 238, 236);\n"
 "font: 75 11pt \"URW Bookman L\";")
         self.b_reset.setObjectName("b_reset")
         self.gridLayout_2.addWidget(self.b_reset, 8, 0, 1, 1)
         self.cb = QtWidgets.QComboBox(self.tab)
         self.cb.setStyleSheet("background-color: rgb(32, 74, 135);\n"
+"\n"
+"color: rgb(238, 238, 236);\n"
 "font: 75 11pt \"URW Bookman L\";")
         self.cb.setObjectName("cb")
         self.cb.addItem("")
@@ -111,12 +130,14 @@ class Ui_MainWindow(object):
         self.l5 = QtWidgets.QLabel(self.tab)
         self.l5.setMinimumSize(QtCore.QSize(128, 128))
         self.l5.setFrameShape(QtWidgets.QFrame.Box)
+        self.l5.setText("")
         self.l5.setScaledContents(True)
         self.l5.setObjectName("l5")
         self.gridLayout_8.addWidget(self.l5, 10, 1, 1, 1)
         self.l3 = QtWidgets.QLabel(self.tab)
         self.l3.setMinimumSize(QtCore.QSize(128, 128))
         self.l3.setFrameShape(QtWidgets.QFrame.Box)
+        self.l3.setText("")
         self.l3.setScaledContents(True)
         self.l3.setObjectName("l3")
         self.gridLayout_8.addWidget(self.l3, 4, 1, 1, 1)
@@ -130,6 +151,7 @@ class Ui_MainWindow(object):
         self.l1.setSizePolicy(sizePolicy)
         self.l1.setMinimumSize(QtCore.QSize(256, 250))
         self.l1.setFrameShape(QtWidgets.QFrame.Box)
+        self.l1.setText("")
         self.l1.setScaledContents(True)
         self.l1.setObjectName("l1")
         self.gridLayout_8.addWidget(self.l1, 1, 0, 1, 2)
@@ -146,6 +168,7 @@ class Ui_MainWindow(object):
         self.l2 = QtWidgets.QLabel(self.tab)
         self.l2.setMinimumSize(QtCore.QSize(128, 128))
         self.l2.setFrameShape(QtWidgets.QFrame.Box)
+        self.l2.setText("")
         self.l2.setScaledContents(True)
         self.l2.setObjectName("l2")
         self.gridLayout_8.addWidget(self.l2, 4, 0, 1, 1)
@@ -162,6 +185,7 @@ class Ui_MainWindow(object):
         self.l4 = QtWidgets.QLabel(self.tab)
         self.l4.setMinimumSize(QtCore.QSize(128, 128))
         self.l4.setFrameShape(QtWidgets.QFrame.Box)
+        self.l4.setText("")
         self.l4.setScaledContents(True)
         self.l4.setObjectName("l4")
         self.gridLayout_8.addWidget(self.l4, 10, 0, 1, 1)
@@ -276,7 +300,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 805, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 929, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -314,19 +338,15 @@ class Ui_MainWindow(object):
         self.cb.setItemText(8, _translate("MainWindow", "rectangles, \'resolution\' phantom"))
         self.lineEdit_3.setText(_translate("MainWindow", "       costructed Image"))
         self.lineEdit_4.setText(_translate("MainWindow", "              Phantom"))
-        self.l5.setText(_translate("MainWindow", "TextLabel"))
-        self.l3.setText(_translate("MainWindow", "TextLabel"))
-        self.l1.setText(_translate("MainWindow", "TextLabel"))
         self.lineEdit_2.setText(_translate("MainWindow", "      K-Space"))
-        self.l2.setText(_translate("MainWindow", "TextLabel"))
         self.lineEdit.setText(_translate("MainWindow", "               T2 Weighted"))
-        self.l4.setText(_translate("MainWindow", "TextLabel"))
         self.lineEdit_5.setText(_translate("MainWindow", "                  T1 Weighted"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Tab 1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Tab 2"))
 
 
 from pyqtgraph import PlotWidget
+import background_rc
 
 
 if __name__ == "__main__":
