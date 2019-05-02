@@ -113,8 +113,8 @@ class MRI(QMainWindow ):
         self.i=0
         self.bp = 1
         self.ratio_count=1
-        self.theta=90
-        self.tr=1000
+        self.theta=10
+        self.tr=100
         self.te=10
         array = self.Phantom(model_no, size)
         self.nomalized_phantom_array=self.Normalization(array)
@@ -174,7 +174,7 @@ class MRI(QMainWindow ):
         # self.l2.setPixmap(pixmap_test)
     def Display_K_Space(self):
         #K-Space
-        K_array=self.K_Space()
+        K_array=self.K_Space_Function()
         #k_space_normalized_array=self.Normalization(K_array)
         img_K = self.convertArrayToImage(K_array)
         pixmap_k = self.ShowImage(img_K)
@@ -182,7 +182,7 @@ class MRI(QMainWindow ):
         self.l5.setPixmap(pixmap_k)
         self.Display_K_Fourier()
     def Display_K_Fourier(self):
-        K_space_fourier_normalized=self.Normalization(self.k_space)
+        K_space_fourier_normalized=self.Normalization(self.kspace)
         img_fourier=self.convertArrayToImage(K_space_fourier_normalized)
         Fourier_pixmap=self.ShowImage(img_fourier)
         Fourier_pixmap=Fourier_pixmap.scaled(self.l4.width(), self.l4.height(), QtCore.Qt.KeepAspectRatio)
@@ -199,7 +199,8 @@ class MRI(QMainWindow ):
         # min_nonzero = np.min(arr[np.nonzero(arr)])
         # arr[== 0] = min_nonzero
 
-        img = np.abs(20 * np.log(arr))
+        #img = np.abs(20 * np.log(arr))
+        img = (arr - np.amin(arr)) * 255 / (np.amax(arr) - np.amin(arr))
         return img
 
     def convertImageToArray(self):
@@ -256,12 +257,12 @@ class MRI(QMainWindow ):
 
                 else:
                     if (Array_3d[x][y][0]>Min_Value and Array_3d[x][y][0]<=AVG):
-                        Array_3d[x][y][1] = 500
+                        Array_3d[x][y][1] = 1000
                         Array_3d[x][y][2] = 50
 
                     elif(Array_3d[x][y][0]>AVG and Array_3d[x][y][0]<=Max_value):
 
-                        Array_3d[x][y][1] = 900
+                        Array_3d[x][y][1] = 1500
                         Array_3d[x][y][2] = 90
         return Array_3d
 
@@ -512,6 +513,64 @@ class MRI(QMainWindow ):
     def Get_TE(self):
         self.te, ok = QInputDialog.getInt(self, "integer input dialog", "enter a Time to Echo")
 
+    def K_Space(self,tr, te, theta, num, array_t1, array_t2):
+
+        # self.tr = 100*np.average(self.array_t1)
+        # self.te = 300
+        k_space = np.zeros((num, num), dtype=np.complex)
+        signal = np.ones((num, num))
+        signalz = np.ones((num, num))
+
+
+
+        # tagging Preparation
+        for n in range(0, num,4):
+            for m in range(0, num):
+                signal[n][m] = signal[n][m] * np.sin(((np.pi) / num) * m)
+                print(signal)
+
+        signal = signal * np.sin(theta * (np.pi / 180))
+        signalz = signal * np.cos(theta * (np.pi / 180))
+
+        # startup Cycle
+        for i in range(5):
+            #signal = signal * np.exp(-te / array_t2)
+            signal = signalz*np.exp(-tr / array_t1)+(1 - np.exp(-tr / array_t1))
+
+        # K-space
+        for kspacerow in range(num):
+                QApplication.processEvents()
+                signal = signal * np.exp(-te / array_t2)
+
+                for kspacecol in range(num):
+                    GX = 2 * np.pi * kspacerow / num
+                    GY = 2 * np.pi * kspacecol / num
+                    QApplication.processEvents()
+                    for i in range(num):
+                        for j in range(num):
+                            total_theta = (GX * i + GY * j)
+                            k_space[kspacerow, kspacecol] += signal[i, j] * np.exp(-1j * total_theta)
+                            QApplication.processEvents()
+                # print("signal",signal)
+                signal = signalz*np.exp(-tr / array_t1)+(1 - np.exp(-tr / array_t1))
+        return k_space
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # def K_Space(self):
     #
@@ -543,10 +602,10 @@ class MRI(QMainWindow ):
     #     x=self.k_space-k
     #     print(x)
     #     return test1
-    def K_Space(self):
+    def K_Space_Function(self):
         print("inside K")
-        self.k_space=HelloCython.K_Space(self.tr, self.te,self.theta,self.num,self.array_t1,self.array_t2)
-        test1 = (np.fft.ifft2(self.k_space))
+        self.kspace=self.K_Space(self.tr, self.te, self.theta, self.num, self.array_t1, self.array_t2)
+        test1 = (np.fft.ifft2(self.kspace))
         test1=self.TimeMapping(test1)
         return test1
 
