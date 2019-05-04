@@ -113,8 +113,8 @@ class MRI(QMainWindow ):
         self.i=0
         self.bp = 1
         self.ratio_count=1
-        self.theta=10
-        self.tr=100
+        self.theta=45
+        self.tr=1000
         self.te=10
         array = self.Phantom(model_no, size)
         self.nomalized_phantom_array=self.Normalization(array)
@@ -142,6 +142,16 @@ class MRI(QMainWindow ):
                 self.T1_Mapped[i][j]=((time_array[i][j]-min_t1)/(max_t1-min_t1))*255
         return self.T1_Mapped
 
+    def Normalization (self, arr):
+        # to get rid of dividing bt zero
+        # min_nonzero = np.min(arr[np.nonzero(arr)])
+        # arr[== 0] = min_nonzero
+
+        #img = np.abs(20 * np.log(arr))
+        img = ((arr - np.amin(arr)) / (np.amax(arr) - np.amin(arr)))*255
+        return img
+
+
 
 
 
@@ -149,7 +159,7 @@ class MRI(QMainWindow ):
         # construct t1 image
         self.array_with_time = self.setTime()
         self.array_t1 = self.Return(self.array_with_time, 1)
-        t1_mapped=self.TimeMapping(self.array_t1)
+        t1_mapped=self.Normalization(self.array_t1)
         #self.array_t1 = self.Return(self.array_with_time, 1)
         self.img_t1 = self.convertArrayToImage(t1_mapped)
         pixmap_t1 = self.ShowImage(self.img_t1)
@@ -160,7 +170,7 @@ class MRI(QMainWindow ):
         # construct t2 image
         self.array_with_time = self.setTime()
         self.array_t2 = self.Return(self.array_with_time, 2)
-        t2_mapped = self.TimeMapping(self.array_t2)
+        t2_mapped = self.Normalization(self.array_t2)
         self.img_t2 = self.convertArrayToImage(t2_mapped)
         pixmap_t2 = self.ShowImage(self.img_t2)
         pixmap_t2 = pixmap_t2.scaled(self.l3.width(), self.l3.height(), QtCore.Qt.KeepAspectRatio)
@@ -194,14 +204,6 @@ class MRI(QMainWindow ):
         pixmap = self.pixmap.scaled(self.l1.width(), self.l1.height(), QtCore.Qt.KeepAspectRatio)
         self.l1.setPixmap(pixmap)
 
-    def Normalization (self, arr):
-        # to get rid of dividing bt zero
-        # min_nonzero = np.min(arr[np.nonzero(arr)])
-        # arr[== 0] = min_nonzero
-
-        #img = np.abs(20 * np.log(arr))
-        img = (arr - np.amin(arr)) * 255 / (np.amax(arr) - np.amin(arr))
-        return img
 
     def convertImageToArray(self):
         # to onvert image to np array of pixels values it should be read as q image at first
@@ -249,27 +251,32 @@ class MRI(QMainWindow ):
         return d1
 
     def Set_T(self,Array_3d,Max_value,Min_Value,AVG):
+        # for x in range(len(Array_3d)):
+        #     for y in range(len(Array_3d)):
+        #         if (Array_3d[x][y][0]>=0 and Array_3d[x][y][0]<=Min_Value ) :
+        #             Array_3d[x][y][1] = 250
+        #             Array_3d[x][y][2] = 90
+        #
+        #         else:
+        #             if (Array_3d[x][y][0]>Min_Value and Array_3d[x][y][0]<=AVG):
+        #                 Array_3d[x][y][1] = 500
+        #                 Array_3d[x][y][2] = 50
+        #
+        #             elif(Array_3d[x][y][0]>AVG and Array_3d[x][y][0]<=Max_value):
+        #
+        #                 Array_3d[x][y][1] = 900
+        #                 Array_3d[x][y][2] = 40
         for x in range(len(Array_3d)):
             for y in range(len(Array_3d)):
-                if (Array_3d[x][y][0]>=0 and Array_3d[x][y][0]<=Min_Value ) :
-                    Array_3d[x][y][1] = 250
-                    Array_3d[x][y][2] = 40
+                    Array_3d[x][y][1] =(((Array_3d[x][y][0]-Min_Value)*650)/(Max_value-Min_Value))+250
+                    Array_3d[x][y][2] =(((Array_3d[x][y][0]-Min_Value)*50)/(Max_value-Min_Value))+40
 
-                else:
-                    if (Array_3d[x][y][0]>Min_Value and Array_3d[x][y][0]<=AVG):
-                        Array_3d[x][y][1] = 1000
-                        Array_3d[x][y][2] = 50
-
-                    elif(Array_3d[x][y][0]>AVG and Array_3d[x][y][0]<=Max_value):
-
-                        Array_3d[x][y][1] = 1500
-                        Array_3d[x][y][2] = 90
         return Array_3d
 
     def setTime(self):
         #self.Pixels_Array = np.asarray(image)
         #self.Pixels_Array_Filterd=self.Filters(Pixels_Array,255)
-        Unique_Pixels_values= np.unique(self.Pixels_Array)
+        Unique_Pixels_values= np.unique(self.nomalized_phantom_array)
         Max_value=np.max(Unique_Pixels_values)
         Min_Value=np.min(Unique_Pixels_values)
         AVG=np.average(self.Pixels_Array)
@@ -279,17 +286,17 @@ class MRI(QMainWindow ):
         return (Array_3d_With_T1_T2)
 
 
-    def Set_T2(self,Array_3d,Max_value,Min_Value):
-        for x in range(len(Array_3d)):
-            for y in range(len(Array_3d)):
-                if (Array_3d[x][y][0] ==Max_value) :
-                    Array_3d[x][y][2]=2000
-                else:
-                    if (Array_3d[x][y][0]==Min_Value):
-                        Array_3d[x][y][2]=5
-                    else:
-                        Array_3d[x][y][2]=int(5+((Array_3d[x][y][0]*2000)/Max_value))
-        return Array_3d
+    # def Set_T2(self,Array_3d,Max_value,Min_Value):
+    #     for x in range(len(Array_3d)):
+    #         for y in range(len(Array_3d)):
+    #             if (Array_3d[x][y][0] ==Max_value) :
+    #                 Array_3d[x][y][2]=2000
+    #             else:
+    #                 if (Array_3d[x][y][0]==Min_Value):
+    #                     Array_3d[x][y][2]=5
+    #                 else:
+    #                     Array_3d[x][y][2]=int(5+((Array_3d[x][y][0]*2000)/Max_value))
+    #     return Array_3d
 
     def Return(self,original_array, index):
         d2 = np.empty((len(original_array), len(original_array)))
@@ -513,6 +520,12 @@ class MRI(QMainWindow ):
     def Get_TE(self):
         self.te, ok = QInputDialog.getInt(self, "integer input dialog", "enter a Time to Echo")
 
+
+
+
+
+    #K-Space
+
     def K_Space(self,tr, te, theta, num, array_t1, array_t2):
 
         # self.tr = 100*np.average(self.array_t1)
@@ -523,25 +536,26 @@ class MRI(QMainWindow ):
 
 
 
-        # tagging Preparation
-        for n in range(0, num,4):
+
+        # # tagging Preparation
+        for n in range(0, num,2):
             for m in range(0, num):
                 signal[n][m] = signal[n][m] * np.sin(((np.pi) / num) * m)
-                print(signal)
-
+        signalInf=signal
         signal = signal * np.sin(theta * (np.pi / 180))
         signalz = signal * np.cos(theta * (np.pi / 180))
+
 
         # startup Cycle
         for i in range(5):
             #signal = signal * np.exp(-te / array_t2)
             signal = signalz*np.exp(-tr / array_t1)+(1 - np.exp(-tr / array_t1))
+            signalz = signal * np.cos(theta * (np.pi / 180))
 
         # K-space
         for kspacerow in range(num):
                 QApplication.processEvents()
                 signal = signal * np.exp(-te / array_t2)
-
                 for kspacecol in range(num):
                     GX = 2 * np.pi * kspacerow / num
                     GY = 2 * np.pi * kspacecol / num
@@ -605,8 +619,10 @@ class MRI(QMainWindow ):
     def K_Space_Function(self):
         print("inside K")
         self.kspace=self.K_Space(self.tr, self.te, self.theta, self.num, self.array_t1, self.array_t2)
+        print(self.te,self.tr)
+        print("k-space finished")
         test1 = (np.fft.ifft2(self.kspace))
-        test1=self.TimeMapping(test1)
+        test1=self.Normalization(test1)
         return test1
 
 
