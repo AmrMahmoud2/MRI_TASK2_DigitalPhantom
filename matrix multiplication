@@ -1,0 +1,10 @@
+def createKSpace(self,unitVector):
+        rotationx = [[1,0,0],[0,np.cos(self.theta),np.sin(self.theta)],[0,-np.sin(self.theta),np.cos(self.theta)]]
+        rotationxy = [[np.cos(self.alpha),-np.sin(self.alpha),0],[-(np.sin(self.alpha)),np.cos(self.alpha),0],[0,0,1]]
+       decayRecoveryArray = [[np.exp(-(range(ti1,ti2))/t2),0,0], [0,np.exp(-(range(ti1,ti2))/t2),0],[0,0,np.exp((range(ti1,ti2))/t1)]]
+       finaldrArray = [[0],[0],[m*(1-(np.exp(-t/t1)))]]
+        rotatedVector = np.matmul(rotationx,self.unitVector)
+        rotatedVector = np.matmul(rotationxy,rotatedVector)
+        rotatedVector = np.matmul(decayRecoveryArray,rotatedVector)
+        rotatedVector = np.add(finaldrArray,rotatedVector)
+    

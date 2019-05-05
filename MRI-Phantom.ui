@@ -714,9 +714,6 @@ background-color: rgb(252, 233, 79);</string>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="2" column="2">
-           <widget class="PlotWidget" name="graphicsView_4"/>
-          </item>
           <item row="2" column="0">
            <widget class="PlotWidget" name="graphicsView_2"/>
           </item>
@@ -754,6 +751,9 @@ background-color: rgb(252, 233, 79);</string>
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="2" column="2">
+           <widget class="PlotWidget" name="graphicsView_4"/>
           </item>
           <item row="0" column="2">
            <widget class="PlotWidget" name="graphicsView_3"/>

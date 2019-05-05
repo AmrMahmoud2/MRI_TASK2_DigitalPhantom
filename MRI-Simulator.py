@@ -34,7 +34,7 @@ fg_color = 'white'
 class MRI(QMainWindow ):
     def __init__(self):
         super(MRI,self).__init__()
-        loadUi('MRI-Phantom.ui',self)
+        loadUi('MRI-GUI.ui',self)
         self.setWindowTitle('MRI-Phantom')
         #self.b1.clicked.connect(self.on_click)
         self.cb.activated[str].connect(self.temp_var)
@@ -117,7 +117,7 @@ class MRI(QMainWindow ):
         self.tr=1000
         self.te=10
         array = self.Phantom(model_no, size)
-        self.nomalized_phantom_array=self.Normalization(array)
+        self.nomalized_phantom_array = self.Normalization(array)
         self.img=self.convertArrayToImage(self.nomalized_phantom_array)
         self.img.save('img.png')
         self.phantom_pixmap=self.ShowImage(self.img)
@@ -129,6 +129,11 @@ class MRI(QMainWindow ):
         self.l1.mouseMoveEvent=self.mouseMoveEvent
         self.l1.paintEvent = self.paintEvent
         self.l1.mousePressEvent = self.getpixels
+        #time seting
+        self.array_with_time = self.setTime()
+        self.array_t1 = self.Return(self.array_with_time, 1)
+        self.array_with_time = self.setTime()
+        self.array_t2 = self.Return(self.array_with_time, 2)
 
 
     def TimeMapping(self,time_array):
@@ -157,10 +162,9 @@ class MRI(QMainWindow ):
 
     def Display_T1(self):
         # construct t1 image
-        self.array_with_time = self.setTime()
-        self.array_t1 = self.Return(self.array_with_time, 1)
+        # self.array_with_time = self.setTime()
+        # self.array_t1 = self.Return(self.array_with_time, 1)
         t1_mapped=self.Normalization(self.array_t1)
-        #self.array_t1 = self.Return(self.array_with_time, 1)
         self.img_t1 = self.convertArrayToImage(t1_mapped)
         pixmap_t1 = self.ShowImage(self.img_t1)
         pixmap_t1 = pixmap_t1.scaled(self.l2.width(), self.l2.height(), QtCore.Qt.KeepAspectRatio)
@@ -168,20 +172,13 @@ class MRI(QMainWindow ):
 
     def Display_T2(self):
         # construct t2 image
-        self.array_with_time = self.setTime()
-        self.array_t2 = self.Return(self.array_with_time, 2)
+        # self.array_with_time = self.setTime()
+        # self.array_t2 = self.Return(self.array_with_time, 2)
         t2_mapped = self.Normalization(self.array_t2)
         self.img_t2 = self.convertArrayToImage(t2_mapped)
         pixmap_t2 = self.ShowImage(self.img_t2)
         pixmap_t2 = pixmap_t2.scaled(self.l3.width(), self.l3.height(), QtCore.Qt.KeepAspectRatio)
         self.l3.setPixmap(pixmap_t2)
-        # I = np.dstack([img, img, img])
-        # x = 73
-        # y = 75
-        # I[x, y, :] = [255, 128, 0]
-        # highlight_img= Image.fromarray(I).convert('RGB')
-        # pixmap_test=self.ShowImage(highlight_img)
-        # self.l2.setPixmap(pixmap_test)
     def Display_K_Space(self):
         #K-Space
         K_array=self.K_Space_Function()
@@ -193,6 +190,8 @@ class MRI(QMainWindow ):
         self.Display_K_Fourier()
     def Display_K_Fourier(self):
         K_space_fourier_normalized=self.Normalization(self.kspace)
+        #shifted_back_fourier_array = np.fft.ifftshift(self.kspace)
+        #inverse_fourier_array = np.fft.ifft2(self.kspace)
         img_fourier=self.convertArrayToImage(K_space_fourier_normalized)
         Fourier_pixmap=self.ShowImage(img_fourier)
         Fourier_pixmap=Fourier_pixmap.scaled(self.l4.width(), self.l4.height(), QtCore.Qt.KeepAspectRatio)
@@ -286,18 +285,6 @@ class MRI(QMainWindow ):
         return (Array_3d_With_T1_T2)
 
 
-    # def Set_T2(self,Array_3d,Max_value,Min_Value):
-    #     for x in range(len(Array_3d)):
-    #         for y in range(len(Array_3d)):
-    #             if (Array_3d[x][y][0] ==Max_value) :
-    #                 Array_3d[x][y][2]=2000
-    #             else:
-    #                 if (Array_3d[x][y][0]==Min_Value):
-    #                     Array_3d[x][y][2]=5
-    #                 else:
-    #                     Array_3d[x][y][2]=int(5+((Array_3d[x][y][0]*2000)/Max_value))
-    #     return Array_3d
-
     def Return(self,original_array, index):
         d2 = np.empty((len(original_array), len(original_array)))
         # print(original_array.shape)
@@ -321,17 +308,6 @@ class MRI(QMainWindow ):
         self.y_paint = self.y_map
         self.x_T = int(self.x_map)
         self.y_T = int(self.y_map)
-        # #mapping for time
-        # if(self.x>=self.num):
-        #     self.x_T = int(self.xratio * self.x)
-        # else:
-        #     self.x_T=self.x
-        #
-        # if (self.y >= self.num):
-        #       self.y_T = int(self.yratio * self.y)
-        # else:
-        #     self.y_T = self.y
-
 
         print('paint x, y', self.x_paint, self.y_paint)
 
@@ -507,9 +483,9 @@ class MRI(QMainWindow ):
 
         # set Graphics View
 
-        self.graphicsView.showGrid(x=True, y=True)
-        self.graphicsView.setCentralItem(self.plt)
-        self.graphicsView_2.setCentralItem(self.plt2)
+        self.graphics1.showGrid(x=True, y=True)
+        self.graphics1.setCentralItem(self.plt)
+        self.graphics2.setCentralItem(self.plt2)
 
     def Get_Theta(self):
         self.theta, ok = QInputDialog.getInt(self, "integer input dialog", "enter a Theta")
@@ -520,38 +496,55 @@ class MRI(QMainWindow ):
     def Get_TE(self):
         self.te, ok = QInputDialog.getInt(self, "integer input dialog", "enter a Time to Echo")
 
+    # Tagging Preparation
+    def Tagging (self,size,signal):
+        for n in range(0, size,2):
+            for m in range(0, size):
+                signal[n][m] = signal[n][m] * np.sin(((np.pi) / size) * m)
+                self.infsingnal=signal
+        return signal
 
+    # startup Cycle
+    def Startup(self,signal,signalz,array_t1,tr,theta):
+        for i in range(5):
+            # signal = signal * np.exp(-te / array_t2)
+            signal = signalz * np.exp(-tr / array_t1) + (1 - np.exp(-tr / array_t1))
+            signalz = signal * np.cos(theta * (np.pi / 180))
 
+        return signal
 
-
-    #K-Space
+    # K-Space
 
     def K_Space(self,tr, te, theta, num, array_t1, array_t2):
 
         # self.tr = 100*np.average(self.array_t1)
         # self.te = 300
-        k_space = np.zeros((num, num), dtype=np.complex)
+
+        # initialization of signal
+        k_space_array = np.zeros((num, num), dtype=np.complex)
         signal = np.ones((num, num))
         signalz = np.ones((num, num))
-
-
-
-
-        # # tagging Preparation
-        for n in range(0, num,2):
-            for m in range(0, num):
-                signal[n][m] = signal[n][m] * np.sin(((np.pi) / num) * m)
-        signalInf=signal
+        # tagging
+        signal=self.Tagging(num,signal)
+        # xy rotation
         signal = signal * np.sin(theta * (np.pi / 180))
         signalz = signal * np.cos(theta * (np.pi / 180))
-
-
         # startup Cycle
-        for i in range(5):
-            #signal = signal * np.exp(-te / array_t2)
-            signal = signalz*np.exp(-tr / array_t1)+(1 - np.exp(-tr / array_t1))
-            signalz = signal * np.cos(theta * (np.pi / 180))
+        #signal = self.Startup(signal, signalz, array_t1,tr,theta)
 
+
+       #  #tagging Preparation
+       #
+       #  for n in range(0, num,2):
+       #      for m in range(0, num):
+       #          signal[n][m] = signal[n][m] * np.sin(((np.pi) / num) * n)
+       #
+       # # start up cycle
+       #
+       #  for i in range(5):
+       #      #signal = signal * np.exp(-te / array_t2)
+       #      signal = signalz*np.exp(-tr / array_t1)+(1 - np.exp(-tr / array_t1))
+       #      signalz = signal * np.cos(theta * (np.pi / 180))
         # K-space
         for kspacerow in range(num):
                 QApplication.processEvents()
@@ -563,11 +556,11 @@ class MRI(QMainWindow ):
                     for i in range(num):
                         for j in range(num):
                             total_theta = (GX * i + GY * j)
-                            k_space[kspacerow, kspacecol] += signal[i, j] * np.exp(-1j * total_theta)
+                            k_space_array[kspacerow, kspacecol] += signal[i, j] * np.exp(-1j * total_theta)
                             QApplication.processEvents()
                 # print("signal",signal)
                 signal = signalz*np.exp(-tr / array_t1)+(1 - np.exp(-tr / array_t1))
-        return k_space
+        return k_space_array
 
 
 

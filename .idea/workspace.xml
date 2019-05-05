@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="082cc236-444c-4bd1-81e2-3318f0693941" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Task2-MRI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MRI-GUI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MRI-Phantom1.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/New Text Document (2).txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/New Text Document.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plotting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back33.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/temp.linux-x86_64-3.6/HelloCython.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/matrix multiplication" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/recov Decay.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MRI-Phantom.ui" beforeDir="false" afterPath="$PROJECT_DIR$/MRI-Phantom.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MRI-Simulator.py" beforeDir="false" afterPath="$PROJECT_DIR$/MRI-Simulator.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Task2_MRI$phantom_test.coverage" NAME="phantom-test Coverage Results" MODIFIED="1553618689903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MRI-Simulator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="527" column="9" selection-start-line="527" selection-start-column="9" selection-end-line="527" selection-end-column="9" />
+              <folding>
+                <element signature="e#1#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MRI-GUI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-24646">
+              <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MRI-Phantom.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/background.qrc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1526231993/tomophantom/TomoP2D.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2970">
+              <caret line="139" column="43" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/phantoms/TomoPhantom/PhantomLibrary/models/Phantom2DLibrary.dat">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/setup.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HelloCython.pyx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>tab</find>
+      <find>array_t1</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/MRI-Phantom2.py" />
+        <option value="$PROJECT_DIR$/MRI-Phantom22.py" />
+        <option value="$PROJECT_DIR$/k-space.pyx.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/k-space.pyx" />
+        <option value="$PROJECT_DIR$/phantom-test.py" />
+        <option value="$PROJECT_DIR$/array-test.py" />
+        <option value="$PROJECT_DIR$/MRI-Phantom.py" />
+        <option value="$PROJECT_DIR$/background.qrc" />
+        <option value="$PROJECT_DIR$/HelloCython.pyx" />
+        <option value="$PROJECT_DIR$/MRI-Simulator.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="615" />
+    <option name="y" value="72" />
+    <option name="width" value="730" />
+    <option name="height" value="594" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Task2-MRI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Task2-MRI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Task2-MRI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Task2-MRI" type="462c0819:PsiDirectoryNode" />
+              <item name="phantoms" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Task2-MRI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Task2-MRI" type="462c0819:PsiDirectoryNode" />
+              <item name="phantoms" type="462c0819:PsiDirectoryNode" />
+              <item name="TomoPhantom" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Task2-MRI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Task2-MRI" type="462c0819:PsiDirectoryNode" />
+              <item name="phantoms" type="462c0819:PsiDirectoryNode" />
+              <item name="TomoPhantom" type="462c0819:PsiDirectoryNode" />
+              <item name="PhantomLibrary" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Task2-MRI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Task2-MRI" type="462c0819:PsiDirectoryNode" />
+              <item name="phantoms" type="462c0819:PsiDirectoryNode" />
+              <item name="TomoPhantom" type="462c0819:PsiDirectoryNode" />
+              <item name="PhantomLibrary" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.phantom-test">
+    <configuration name="HelloCython.pyx" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Task2-MRI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HelloCython.pyx" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Task2-MRI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="phantom-test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Task2-MRI" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MRI-Simulator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.phantom-test" />
+        <item itemvalue="Python.HelloCython.pyx" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="082cc236-444c-4bd1-81e2-3318f0693941" name="Default Changelist" comment="" />
+      <created>1553256677109</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553256677109</updated>
+      <workItem from="1553256678734" duration="2340000" />
+      <workItem from="1553267519995" duration="1898000" />
+      <workItem from="1553275604434" duration="2724000" />
+      <workItem from="1553282014095" duration="14802000" />
+      <workItem from="1553354936238" duration="1312000" />
+      <workItem from="1553569680212" duration="5682000" />
+      <workItem from="1553616498581" duration="4246000" />
+      <workItem from="1553622423542" duration="2513000" />
+      <workItem from="1553634373292" duration="1458000" />
+      <workItem from="1553678724615" duration="353000" />
+      <workItem from="1553682626258" duration="5808000" />
+      <workItem from="1553692970000" duration="5314000" />
+      <workItem from="1553714885348" duration="3666000" />
+      <workItem from="1553765887755" duration="6491000" />
+      <workItem from="1553772573531" duration="16426000" />
+      <workItem from="1554413688948" duration="186000" />
+      <workItem from="1554670979994" duration="14724000" />
+      <workItem from="1554806311377" duration="8523000" />
+      <workItem from="1554822776107" duration="15035000" />
+      <workItem from="1554889240828" duration="1421000" />
+      <workItem from="1554890707204" duration="199000" />
+      <workItem from="1554891174891" duration="7627000" />
+      <workItem from="1554908286996" duration="9575000" />
+      <workItem from="1554925622253" duration="22681000" />
+      <workItem from="1554949086032" duration="2584000" />
+      <workItem from="1554980176567" duration="3824000" />
+      <workItem from="1554985482997" duration="631000" />
+      <workItem from="1554986154131" duration="3462000" />
+      <workItem from="1555273479436" duration="2493000" />
+      <workItem from="1555845329849" duration="4149000" />
+      <workItem from="1556056490914" duration="8792000" />
+      <workItem from="1556118620122" duration="10226000" />
+      <workItem from="1556225431900" duration="1126000" />
+      <workItem from="1556314899133" duration="19233000" />
+      <workItem from="1556362158595" duration="9631000" />
+      <workItem from="1556375334789" duration="5222000" />
+      <workItem from="1556621068644" duration="6992000" />
+      <workItem from="1556802880987" duration="11254000" />
+      <workItem from="1556832409622" duration="7000000" />
+      <workItem from="1556905229371" duration="24882000" />
+      <workItem from="1557001197972" duration="13850000" />
+    </task>
+    <task id="LOCAL-00001" summary="&quot;Plotting T1 and T2 With different colors for each pixel&quot;">
+      <created>1553307306139</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1553307306140</updated>
+    </task>
+    <task id="LOCAL-00002" summary="&quot;Two Tabs&quot;">
+      <created>1553307365167</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1553307365167</updated>
+    </task>
+    <task id="LOCAL-00003" summary="&quot;K-space&quot;">
+      <created>1553623624914</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1553623624914</updated>
+    </task>
+    <task id="LOCAL-00004" summary="&quot;GUI-Update&quot;">
+      <created>1553623793539</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1553623793539</updated>
+    </task>
+    <task id="LOCAL-00005" summary="&quot;T1 and T2 Weighted&quot;">
+      <created>1553691502660</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1553691502661</updated>
+    </task>
+    <task id="LOCAL-00006" summary="&quot;Pixels Highlighting&quot;">
+      <created>1554685644149</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1554685644149</updated>
+    </task>
+    <task id="LOCAL-00007" summary="&quot;Update2&quot;">
+      <created>1554951572711</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1554951572712</updated>
+    </task>
+    <task id="LOCAL-00008" summary="&quot;Final Task First Commit &quot;">
+      <created>1556071205652</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1556071205652</updated>
+    </task>
+    <task id="LOCAL-00009" summary="&quot; Tagging Preparation &quot;">
+      <created>1556225976689</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1556225976689</updated>
+    </task>
+    <task id="LOCAL-00010" summary="&quot; Tagging Preparation *Only Vertical is Working*  &quot;">
+      <created>1556372583484</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1556372583484</updated>
+    </task>
+    <task id="LOCAL-00011" summary="&quot; Tagging Preparation *Only Vertical is Working*  &quot;">
+      <created>1556628392279</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1556628392279</updated>
+    </task>
+    <task id="LOCAL-00012" summary="&quot; Tagging Preparation * But there is something wrong and i don't know what is it or why it is happening  &quot;">
+      <created>1556833937844</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1556833937844</updated>
+    </task>
+    <task id="LOCAL-00013" summary="&quot; T1 and T2 Both are Strongly Affecting Tagging Prep  &quot;">
+      <created>1556940503285</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1556940503285</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="290355000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.07182761" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32934132" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4535928" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.36976048" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.27844313" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" x="678" y="204" width="75" height="356" id="SciView" order="3" sideWeight="0.88598573" visible="true" weight="0.18834797" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" x="0" y="0" width="275" height="580" id="Documentation" order="5" sideWeight="0.11401425" side_tool="true" visible="true" weight="0.18834797" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23064645" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.36526945" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.40868264" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.20808384" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.92086333" weight="0.29239765" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" x="0" y="0" width="275" height="580" id="Documentation" order="5" sideWeight="0.0804878" side_tool="true" weight="0.2122905" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;Plotting T1 and T2 With different colors for each pixel&quot;" />
+    <MESSAGE value="&quot;Two Tabs&quot;" />
+    <MESSAGE value="&quot;K-space&quot;" />
+    <MESSAGE value="&quot;GUI-Update&quot;" />
+    <MESSAGE value="&quot;T1 and T2 Weighted&quot;" />
+    <MESSAGE value="&quot;Pixels Highlighting&quot;" />
+    <MESSAGE value="&quot;Update&quot;" />
+    <MESSAGE value="&quot;Update2&quot;" />
+    <MESSAGE value="&quot;Final Task First Commit &quot;" />
+    <MESSAGE value="&quot; Tagging Preparation &quot;" />
+    <MESSAGE value="&quot; Tagging Preparation *Only Vertical is Working*  &quot;" />
+    <MESSAGE value="&quot; Tagging Preparation * But there is something wrong and i don't know what is it or why it is happening  &quot;" />
+    <MESSAGE value="&quot; T1 and T2 Both are Strongly Affecting Tagging Prep  &quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot; T1 and T2 Both are Strongly Affecting Tagging Prep  &quot;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="signal[0][0]" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Task2_MRI$HelloCython_pyx.coverage" NAME="HelloCython.pyx Coverage Results" MODIFIED="1556063475067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Task2_MRI$phantom_test.coverage" NAME="phantom-test Coverage Results" MODIFIED="1556926618265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>signal[0][0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-1526231993/tomophantom/TomoP2D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2046">
+          <caret line="112" column="32" lean-forward="true" selection-start-line="112" selection-start-column="32" selection-end-line="112" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MRI-Phantom2.py" />
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1526231993/PyQt5/QtGui/QPixmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="186" column="8" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1526231993/PyQt5/QtWidgets/QWidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10604">
+          <caret line="484" column="14" selection-start-line="484" selection-start-column="14" selection-end-line="484" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/Cython/Build/Dependencies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="1150" column="24" selection-start-line="1150" selection-start-column="24" selection-end-line="1150" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/k-space.pyx" />
+    <entry file="file://$PROJECT_DIR$/HelloCython.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10692" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Plotting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MRI-Phantom22.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="105" column="53" selection-start-line="105" selection-start-column="53" selection-end-line="105" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recov Decay.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="26" selection-start-line="7" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/array-test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="131" selection-start-line="131" selection-end-line="131" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/background.qrc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-1526231993/tomophantom/TomoP2D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2970">
+          <caret line="139" column="43" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/phantoms/TomoPhantom/PhantomLibrary/models/Phantom2DLibrary.dat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HelloCython.pyx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MRI-Phantom.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MRI-GUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-24646">
+          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MRI-Simulator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="527" column="9" selection-start-line="527" selection-start-column="9" selection-end-line="527" selection-end-column="9" />
+          <folding>
+            <element signature="e#1#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

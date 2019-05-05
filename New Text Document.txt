@@ -1,0 +1,2 @@
+        enhancer = ImageEnhance.Brightness(im)
+        enhanced_im = enhancer.enhance(bright_ratio)

@@ -1,0 +1,19 @@
+        
+    def draw_curves(self,unitVector, delta , t1 , t2 , theta , alpha):
+        x_curve=[]
+        y_curve=[]
+        z_curve=[]
+        theta = ((theta * 22/7 )/180)
+        rotationx = [[1,0,0],[0,np.cos(theta),np.sin(theta)],[0,-np.sin(theta),np.cos(theta)]]
+        rotationxy = [[np.cos(alpha),-np.sin(alpha),0],[-(np.sin(alpha)),np.cos(alpha),0],[0,0,1]]
+        for delta_t in range (delta):    
+            decayRecoveryArray = [[np.exp(-delta_t/t2),0,0], [0,np.exp(-delta_t/t2),0],[0,0,np.exp(delta_t/t1)]]
+            finaldrArray = [[0],[0],[(1-(np.exp(delta_t/t1)))]]
+            rotatedVector = np.matmul(rotationx,unitVector)
+            rotatedVector = np.matmul(rotationxy,rotatedVector)
+            rotatedVector = np.matmul(decayRecoveryArray,rotatedVector)
+            rotatedVector = finaldrArray+rotatedVector
+            x_curve.extend(rotatedVector[0])
+            y_curve.extend(rotatedVector[1])
+            z_curve.extend(rotatedVector[2])
+        return x_curve , y_curve
